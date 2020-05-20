@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Almacen</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- CRUD -->
+
+    <string name="product_title_insert">Producto</string>
+    <string name="product_name">Nombre del Producto</string>
+    <string name="product_description">Descripción del Producto</string>
+    <string name="product_price_buy">Precio de Compra</string>
+    <string name="product_price_sell">Precio de Venta</string>
+    <string name="product_amount">Cantidad</string>
+
+    <string name="product_buy">Compra</string>
+    <string name="product_sell">Venta</string>
+    <string name="product_earn">Ganancia</string>
+
+    <!-- Alerts and Actions -->
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_accept">Aceptar</string>
+    <string name="action_create">Crear</string>
+    <string name="action_view_products">Ver Productos</string>
+    <string name="action_view_sells">Ver Ventas</string>
+    <string name="action_view_statistics">Ver Estadística</string>
+    <string name="menu_item_share_product">Compartir</string>
+
+    <string name="alert_empty_name">Escriba un nombre para el producto</string>
+    <string name="alert_empty_description">Escriba una descripción para el producto</string>
+    <string name="alert_empty_price">Escriba un precio para el producto</string>
+    <string name="alert_empty_amount">Escriba un valor de la cantidad de productos</string>
+
+</resources>

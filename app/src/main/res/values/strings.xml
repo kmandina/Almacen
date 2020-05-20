@@ -1,0 +1,35 @@
+<resources>
+
+    <string name="app_name">Warehouse</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- CRUD -->
+
+    <string name="product_title_insert">Product</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_description">Product Description</string>
+    <string name="product_price_buy">Buy Price</string>
+    <string name="product_price_sell">Sell Price</string>
+    <string name="product_amount">Amount</string>
+
+    <string name="product_buy">Buy</string>
+    <string name="product_sell">Sell</string>
+    <string name="product_earn">Earn</string>
+
+    <!-- Alerts and Actions -->
+    <string name="action_cancel">Cancel</string>
+    <string name="action_accept">Accept</string>
+    <string name="action_create">Create</string>
+    <string name="action_view_products">Products View</string>
+    <string name="action_view_sells">Sell View</string>
+    <string name="action_view_statistics">Statistics View</string>
+    <string name="menu_item_share_product">Compartir</string>
+
+    <string name="alert_empty_name">Type a name</string>
+    <string name="alert_empty_description">Type a description</string>
+    <string name="alert_empty_price">Type a value for price</string>
+    <string name="alert_empty_amount">Type a value for amount of products</string>
+
+</resources>

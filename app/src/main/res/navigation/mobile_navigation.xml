@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.auu.hunterblade.almacen.ui.fragments.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_product_list"
+            app:destination="@id/navigation_product_list"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_navigation_home_to_sell_list"
+            app:destination="@id/navigation_sell_list"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.auu.hunterblade.almacen.ui.fragments.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.auu.hunterblade.almacen.ui.fragments.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_product_list"
+        android:name="com.auu.hunterblade.almacen.ui.fragments.products.ProductsFragment"
+        android:label="Products"
+        tools:layout="@layout/fragment_products">
+
+        <action
+            android:id="@+id/action_navigation_product_list_to_navigation_product_detail"
+            app:destination="@id/navigation_product_detail"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_product_detail"
+        android:name="com.auu.hunterblade.almacen.ui.fragments.products.ProductDetailFragment"
+        android:label="Product Detail"
+        tools:layout="@layout/fragment_product_detail" >
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_sell_list"
+        android:name="com.auu.hunterblade.almacen.ui.fragments.sells.SellListFragment"
+        android:label="Sells"
+        tools:layout="@layout/fragment_list_sell">
+
+        <action
+            android:id="@+id/action_navigation_sell_list_to_sell_view"
+            app:destination="@id/navigation_sell_view"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_sell_view"
+        android:name="com.auu.hunterblade.almacen.ui.fragments.sells.SellFragment"
+        android:label="Sell View"
+        tools:layout="@layout/fragment_sell_view" >
+        <argument
+            android:name="id"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_navigation_sell_view_to_sell_product_register"
+            app:destination="@id/navigation_sell_product_register"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_sell_product_register"
+        android:name="com.auu.hunterblade.almacen.ui.fragments.sells.SellProductRegisterFragment"
+        android:label="Register Sell Product"
+        tools:layout="@layout/fragment_sell_product_register">
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
+
+</navigation>
