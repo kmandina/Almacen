@@ -59,7 +59,7 @@
                 app:layout_constraintStart_toEndOf="@+id/producto_item_title"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:setDoublesEarn="@{sell.totalEarn}"
+                app:setFloatEarn="@{sell.totalEarn}"
                 tools:text="Sell Earn" />
 
 

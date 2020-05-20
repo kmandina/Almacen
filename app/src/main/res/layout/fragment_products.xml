@@ -9,6 +9,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/colorBackgroundMain"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -18,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
-                android:theme="@style/Theme.MaterialComponents.DayNight">
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -33,7 +34,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
                         android:gravity="center"
-                        android:text="@string/app_name"
+                        android:text="@string/title_products"
                         android:textAppearance="?attr/textAppearanceHeadline5" />
 
                 </androidx.appcompat.widget.Toolbar>
@@ -46,17 +47,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="75dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginEnd="5dp"
                 app:layout_anchorGravity="bottom|end"
-                app:srcCompat="@android:drawable/btn_plus" />
+                app:srcCompat="@drawable/ic_plus" />
 
             <androidx.recyclerview.widget.RecyclerView
                 app:layout_constraintTop_toBottomOf="@+id/app_bar_layout"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginBottom="70dp"
                 android:id="@+id/products"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

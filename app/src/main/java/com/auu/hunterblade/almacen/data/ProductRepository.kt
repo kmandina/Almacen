@@ -41,6 +41,15 @@ class ProductRepository private constructor(private val productDao: ProductDao) 
 
     }
 
+    fun updateProductById(id: Long, value: Long){
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            productDao.updateProductById(id, value)
+
+        }
+    }
+
     companion object {
 
         // For Singleton instantiation

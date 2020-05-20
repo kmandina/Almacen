@@ -122,26 +122,26 @@ fun bindRenderHtml(view: TextView, description: String?) {
     }
 }
 
-@BindingAdapter("setDoublesBuy")
-fun bindDoubleTextBuy(textView: TextView, v: Double) {
+@BindingAdapter("setFloatBuy")
+fun bindFloatTextBuy(textView: TextView, v: Float) {
 
     textView.text = textView.context.getString(R.string.product_buy) + " $$v"
 }
 
-@BindingAdapter("setDoublesSell")
-fun bindDoubleTextSell(textView: TextView, v: Double) {
+@BindingAdapter("setFloatSell")
+fun bindFloatTextSell(textView: TextView, v: Float) {
 
     textView.text = textView.context.getString(R.string.product_sell) + " $$v"
 }
 
-@BindingAdapter("setDoublesEarn")
-fun bindDoubleTextEarn(textView: TextView, v: Double) {
+@BindingAdapter("setFloatEarn")
+fun bindFloatTextEarn(textView: TextView, v: Float) {
 
     textView.text = textView.context.getString(R.string.product_earn) + " $$v"
 }
 
 @BindingAdapter("setLong")
-fun bindDoubleText(textView: TextView, v: Long) {
+fun bindFloatText(textView: TextView, v: Long) {
 
     textView.text = textView.context.getString(R.string.product_amount) + " $v"
 }

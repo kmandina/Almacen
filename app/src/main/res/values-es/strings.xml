@@ -2,9 +2,15 @@
 <resources>
 
     <string name="app_name">Almacen</string>
-    <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_products">Productos</string>
+    <string name="title_statistics">Estadística</string>
+    <string name="title_settings">Ajustes</string>
+    <string name="title_sell_product_register">Selecciones un Producto</string>
+    <string name="title_sells">Ventas</string>
+    <string name="title_sell">Venta</string>
+    <string name="title_date">Fecha</string>
+    <string name="title_earn">Ganancia</string>
 
     <!-- CRUD -->
 
@@ -19,18 +25,21 @@
     <string name="product_sell">Venta</string>
     <string name="product_earn">Ganancia</string>
 
+    <string name="product_sell_title_insert">Producto a Vender</string>
+    <string name="product_sell_amount">Cantidad del Producto a Vender</string>
+
     <!-- Alerts and Actions -->
     <string name="action_cancel">Cancelar</string>
     <string name="action_accept">Aceptar</string>
     <string name="action_create">Crear</string>
     <string name="action_view_products">Ver Productos</string>
     <string name="action_view_sells">Ver Ventas</string>
-    <string name="action_view_statistics">Ver Estadística</string>
     <string name="menu_item_share_product">Compartir</string>
 
     <string name="alert_empty_name">Escriba un nombre para el producto</string>
     <string name="alert_empty_description">Escriba una descripción para el producto</string>
     <string name="alert_empty_price">Escriba un precio para el producto</string>
     <string name="alert_empty_amount">Escriba un valor de la cantidad de productos</string>
+    <string name="alert_overflow_amount">El valor es mayor que la cantidad de productos exitente</string>
 
 </resources>

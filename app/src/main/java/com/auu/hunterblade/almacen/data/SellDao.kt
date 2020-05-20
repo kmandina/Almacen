@@ -3,13 +3,14 @@ package com.auu.hunterblade.almacen.data
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
+
 @Dao
 interface SellDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(sell: Sell)
 
-    @Query("SELECT * from sell ORDER BY id ASC")
+    @Query("SELECT * from sell ORDER BY id DESC")
     fun getAllSell(): LiveData<List<Sell>>
 
     @Query("SELECT * FROM sell WHERE id = :id")
@@ -31,5 +32,14 @@ interface SellDao {
     @Transaction
     @Query("SELECT * FROM sell WHERE id = :id AND id IN (SELECT sell_id FROM productSell)")
     fun getSellProductsById(id: Long): LiveData<SellAndProductSell>
+
+    @Query("UPDATE sell SET totalEarn = :value WHERE id = :id")
+    fun updateSellById(id: Long, value: Float)
+
+    @Update
+    fun updateSell(sell: Sell)
+
+    @Query("SELECT SUM(totalEarn) from sell")
+    fun getSumEarn(): LiveData<Float?>
 
 }

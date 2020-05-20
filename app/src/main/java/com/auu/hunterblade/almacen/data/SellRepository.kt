@@ -52,6 +52,8 @@ class SellRepository private constructor(private val sellDao: SellDao, private v
 
     }
 
+    fun getSumEarn() = sellDao.getSumEarn()
+
     /* Products Sell */
 
     fun getAllProductSell() = productSellDao.getAllProductSell()
@@ -60,12 +62,12 @@ class SellRepository private constructor(private val sellDao: SellDao, private v
 
     fun getProductSellByIdSell(id: Long) = productSellDao.getProductSellByIdSell(id)
 
-    fun addProductSell(productSell: ProductSell) {
+    fun addProductSell(productSell: ProductSell, sell: Sell) {
 
         CoroutineScope(Dispatchers.IO).launch {
 
             productSellDao.insert(productSell)
-
+            sellDao.updateSellById(sell.idSell, sell.totalEarn + productSell.earnSell)
         }
 
     }
@@ -78,11 +80,12 @@ class SellRepository private constructor(private val sellDao: SellDao, private v
         }
 
     }
-    fun deleteProductSell(productSell: ProductSell) {
+    fun deleteProductSell(productSell: ProductSell, amount: Float, id: Long) {
 
         CoroutineScope(Dispatchers.IO).launch {
 
             productSellDao.deleteProductSell(productSell)
+            sellDao.updateSellById(id, amount - productSell.earnSell)
 
         }
 

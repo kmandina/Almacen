@@ -14,6 +14,8 @@ import androidx.navigation.fragment.navArgs
 import com.auu.hunterblade.almacen.databinding.FragmentSellViewBinding
 import com.auu.hunterblade.almacen.ui.adapters.ListProdsSellAdapter
 import com.auu.hunterblade.almacen.utils.InjectorUtils
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SellFragment : Fragment() {
 
@@ -37,6 +39,14 @@ class SellFragment : Fragment() {
         binding.prodSells.adapter = adapter
         subscribeUi(adapter)
 
+        viewModel.sell.observe(viewLifecycleOwner){
+
+            val dateFormat = SimpleDateFormat("MMM d, yyyy", Locale.US)
+
+            binding.tvDate.text =  dateFormat.format(it.date.time)
+            viewModel.sell.removeObservers(viewLifecycleOwner)
+        }
+
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         binding.toolbar.setNavigationOnClickListener { view ->
@@ -54,7 +64,7 @@ class SellFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: ListProdsSellAdapter) {
-        viewModel.sell.observe(viewLifecycleOwner){ list ->
+        viewModel.sellList.observe(viewLifecycleOwner){ list ->
             adapter.submitList(list)
         }
     }

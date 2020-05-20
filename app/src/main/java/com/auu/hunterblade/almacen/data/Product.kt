@@ -9,9 +9,9 @@ data class Product(
 
     @ColumnInfo(name = "description") val description: String,
 
-    @ColumnInfo(name = "price_buy") val priceBuy: Double,
+    @ColumnInfo(name = "price_buy") val priceBuy: Float,
 
-    @ColumnInfo(name = "price_sell") val priceSell: Double,
+    @ColumnInfo(name = "price_sell") val priceSell: Float,
 
     @ColumnInfo(name = "photo") val photo: String,
 

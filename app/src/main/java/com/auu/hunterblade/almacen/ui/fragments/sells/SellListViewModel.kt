@@ -12,6 +12,8 @@ class SellListViewModel internal constructor(
 
     val lista = sellRepository.getAllSell()
 
+    val sum = sellRepository.getSumEarn()
+
     fun addSell(sell: Sell) = sellRepository.addSell(sell)
 
 }

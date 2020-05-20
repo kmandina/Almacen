@@ -116,7 +116,7 @@ class ProductsFragment : Fragment() {
 
                 if(Validador()){
 
-                    val prod = Product(name.text.toString(), description.text.toString(), priceBuy.text.toString().toDouble(), priceSell.text.toString().toDouble(), "url", amount.text.toString().toLong())
+                    val prod = Product(name.text.toString(), description.text.toString(), priceBuy.text.toString().toFloat(), priceSell.text.toString().toFloat(), "url", amount.text.toString().toLong())
 
                     viewModel.addProduct(prod)
                     d.dismiss()

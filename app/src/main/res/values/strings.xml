@@ -1,9 +1,16 @@
 <resources>
 
+    <!-- Titles -->
     <string name="app_name">Warehouse</string>
-    <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_products">Products</string>
+    <string name="title_statistics">Statistics</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_sell_product_register">Select a Product</string>
+    <string name="title_sells">Sells</string>
+    <string name="title_sell">Sell</string>
+    <string name="title_date">Date</string>
+    <string name="title_earn">Earns</string>
 
     <!-- CRUD -->
 
@@ -18,18 +25,21 @@
     <string name="product_sell">Sell</string>
     <string name="product_earn">Earn</string>
 
+    <string name="product_sell_title_insert">Product Sell</string>
+    <string name="product_sell_amount">Product Amount</string>
+
     <!-- Alerts and Actions -->
     <string name="action_cancel">Cancel</string>
     <string name="action_accept">Accept</string>
     <string name="action_create">Create</string>
     <string name="action_view_products">Products View</string>
     <string name="action_view_sells">Sell View</string>
-    <string name="action_view_statistics">Statistics View</string>
-    <string name="menu_item_share_product">Compartir</string>
+    <string name="menu_item_share_product">Share</string>
 
     <string name="alert_empty_name">Type a name</string>
     <string name="alert_empty_description">Type a description</string>
     <string name="alert_empty_price">Type a value for price</string>
     <string name="alert_empty_amount">Type a value for amount of products</string>
+    <string name="alert_overflow_amount">The value is bigger than products available</string>
 
 </resources>

@@ -12,4 +12,6 @@ class ProductViewModel internal constructor(
 
     fun addProduct(prod: Product) = productRepository.addProduct(prod)
 
+    fun updateProductById(id: Long, value: Long) = productRepository.updateProductById(id, value)
+
 }

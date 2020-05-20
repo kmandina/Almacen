@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.auu.hunterblade.almacen.ui.fragments.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_home" >
 
         <action
@@ -30,15 +30,15 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_statistics"
         android:name="com.auu.hunterblade.almacen.ui.fragments.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_statistics"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_settings"
         android:name="com.auu.hunterblade.almacen.ui.fragments.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_settings"
         tools:layout="@layout/fragment_notifications" />
 
     <fragment

@@ -13,6 +13,9 @@ import com.auu.hunterblade.almacen.data.Sell
 import com.auu.hunterblade.almacen.databinding.ListItemProductsBinding
 import com.auu.hunterblade.almacen.databinding.ListItemSellsBinding
 import com.auu.hunterblade.almacen.ui.fragments.products.ProductsFragmentDirections
+import com.auu.hunterblade.almacen.ui.fragments.sells.SellListFragmentDirections
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ListSellsAdapter : ListAdapter<Sell, RecyclerView.ViewHolder>(ListSellDiffCallback()) {
 
@@ -33,21 +36,20 @@ class ListSellsAdapter : ListAdapter<Sell, RecyclerView.ViewHolder>(ListSellDiff
         init {
             binding.setClickListener {
                 binding.sell?.let { item ->
-//                    navigateToSell(item, it)
+                    navigateToSell(item, it)
                 }
             }
         }
 
-//        private fun navigateToSell(
-//            item: Sell,
-//            view: View
-//        ) {
-//            val direction =
-//                ProductsFragmentDirections.actionNavigationProductListToNavigationProductDetail(
-//                    item.idProducto
-//                )
-//            view.findNavController().navigate(direction)
-//        }
+        private fun navigateToSell(
+            item: Sell,
+            view: View
+        ) {
+
+            val direction =
+                SellListFragmentDirections.actionNavigationSellListToSellView(item.idSell)
+            view.findNavController().navigate(direction)
+        }
 
         fun bind(item: Sell) {
             binding.apply {

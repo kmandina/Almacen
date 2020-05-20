@@ -19,7 +19,7 @@ data class ProductSell (
 
     @ColumnInfo(name = "amountSell") val amountSell: Long,
 
-    @ColumnInfo(name = "earnSell") val earnSell: Double
+    @ColumnInfo(name = "earnSell") val earnSell: Float
 ){
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var idProductSell: Long = 0
 }

@@ -1,25 +1,19 @@
 package com.auu.hunterblade.almacen.ui.fragments.sells
 
-import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
-import com.auu.hunterblade.almacen.R
-import com.auu.hunterblade.almacen.data.Product
 import com.auu.hunterblade.almacen.data.Sell
 import com.auu.hunterblade.almacen.databinding.FragmentListSellBinding
-import com.auu.hunterblade.almacen.databinding.FragmentProductsBinding
-import com.auu.hunterblade.almacen.ui.adapters.ListProdsAdapter
 import com.auu.hunterblade.almacen.ui.adapters.ListSellsAdapter
-import com.auu.hunterblade.almacen.ui.fragments.products.ProductViewModel
-import com.auu.hunterblade.almacen.ui.fragments.products.ProductsFragmentDirections
 import com.auu.hunterblade.almacen.utils.InjectorUtils
 
 class SellListFragment : Fragment() {
@@ -42,13 +36,23 @@ class SellListFragment : Fragment() {
         binding.sells.adapter = adapter
         subscribeUi(adapter)
 
+        viewModel.sum.observe(viewLifecycleOwner) {
+
+            if (it != null) {
+                binding.tvEarn.text = "$$it"
+            }else {
+                binding.tvEarn.text= "$0"
+            }
+        }
+
         binding.addProd.setOnClickListener {
 
             var bandera = false
 
             viewModel.lista.observe(viewLifecycleOwner){ list ->
 
-                if(bandera){
+                if(bandera && list.isNotEmpty()){
+
                     it.findNavController().navigate(
                         SellListFragmentDirections.actionNavigationSellListToSellView(list.first().idSell)
                     )
@@ -68,12 +72,11 @@ class SellListFragment : Fragment() {
         return binding.root
     }
 
-
-
-    private fun subscribeUi(adapter: ListSellsAdapter) {
+    private fun subscribeUi(
+        adapter: ListSellsAdapter
+    ) {
         viewModel.lista.observe(viewLifecycleOwner){ list ->
             adapter.submitList(list)
-
         }
     }
 }

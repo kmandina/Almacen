@@ -58,7 +58,7 @@
                 app:layout_constraintStart_toEndOf="@+id/producto_item_title"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:setDoublesEarn="@{product.earnSell}"
+                app:setFloatEarn="@{product.earnSell}"
                 tools:text="Product earnSell" />
 
             <TextView

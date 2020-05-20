@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import com.auu.hunterblade.almacen.databinding.FragmentProductsBinding
 import com.auu.hunterblade.almacen.databinding.FragmentSellProductRegisterBinding
 import com.auu.hunterblade.almacen.ui.adapters.ListProdsAdapter
+import com.auu.hunterblade.almacen.ui.adapters.ListProdsForSellAdapter
 import com.auu.hunterblade.almacen.ui.fragments.products.ProductViewModel
 import com.auu.hunterblade.almacen.utils.InjectorUtils
 
@@ -20,8 +21,12 @@ class SellProductRegisterFragment : Fragment() {
 
     private val args: SellProductRegisterFragmentArgs by navArgs()
 
-    private val viewModel: ProductViewModel by viewModels {
+    private val viewModelProducts: ProductViewModel by viewModels {
         InjectorUtils.provideProductViewModelFactory(requireActivity())
+    }
+
+    private val viewModelSell: SellViewModel by viewModels {
+        InjectorUtils.provideSellViewModelFactory(requireActivity(), args.id)
     }
 
     override fun onCreateView(
@@ -33,9 +38,14 @@ class SellProductRegisterFragment : Fragment() {
 
         context ?: return binding.root
 
-        val adapter = ListProdsAdapter()
-        binding.products.adapter = adapter
-        subscribeUi(adapter)
+        viewModelSell.sell.observe(viewLifecycleOwner){
+
+            val adapter = ListProdsForSellAdapter(args.id, viewModelSell, viewModelProducts)
+            binding.products.adapter = adapter
+            subscribeUi(adapter)
+            viewModelSell.sell.removeObservers(viewLifecycleOwner)
+
+        }
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
@@ -46,8 +56,8 @@ class SellProductRegisterFragment : Fragment() {
         return binding.root
     }
 
-    private fun subscribeUi(adapter: ListProdsAdapter) {
-        viewModel.lista.observe(viewLifecycleOwner){ list ->
+    private fun subscribeUi(adapter: ListProdsForSellAdapter) {
+        viewModelProducts.lista.observe(viewLifecycleOwner){ list ->
             adapter.submitList(list)
         }
     }
