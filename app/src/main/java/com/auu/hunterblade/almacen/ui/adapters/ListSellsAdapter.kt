@@ -1,6 +1,7 @@
 package com.auu.hunterblade.almacen.ui.adapters
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,16 +9,13 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.auu.hunterblade.almacen.data.Product
+import com.auu.hunterblade.almacen.R
 import com.auu.hunterblade.almacen.data.Sell
-import com.auu.hunterblade.almacen.databinding.ListItemProductsBinding
 import com.auu.hunterblade.almacen.databinding.ListItemSellsBinding
-import com.auu.hunterblade.almacen.ui.fragments.products.ProductsFragmentDirections
 import com.auu.hunterblade.almacen.ui.fragments.sells.SellListFragmentDirections
-import java.text.SimpleDateFormat
-import java.util.*
+import com.auu.hunterblade.almacen.ui.fragments.sells.SellListViewModel
 
-class ListSellsAdapter : ListAdapter<Sell, RecyclerView.ViewHolder>(ListSellDiffCallback()) {
+class ListSellsAdapter(val viewModel: SellListViewModel) : ListAdapter<Sell, RecyclerView.ViewHolder>(ListSellDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return SellViewHolder(
@@ -28,10 +26,23 @@ class ListSellsAdapter : ListAdapter<Sell, RecyclerView.ViewHolder>(ListSellDiff
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val sell = getItem(position)
         (holder as SellViewHolder).bind(sell)
+
+        holder.binding.ibClear.setOnClickListener {
+
+            val context = it.context
+
+            AlertDialog.Builder(context)
+                .setTitle(context.getString(R.string.notification))
+                .setMessage(context.getString(R.string.alert_delete))
+                .setNegativeButton(context.getString(R.string.cancel)) { _, _ ->   }
+                .setPositiveButton(context.getString(R.string.accept)) { _, _ ->  viewModel.deleteSell(sell) }
+                .show()
+
+        }
     }
 
     class SellViewHolder(
-        private val binding: ListItemSellsBinding
+        val binding: ListItemSellsBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {

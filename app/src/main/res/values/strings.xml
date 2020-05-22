@@ -49,5 +49,11 @@
 
     <string name="alert_overflow_note">Maximum of characters is 20</string>
 
+    <string name="alert_delete">Do you want to delete the item?</string>
+
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="notification">Notification</string>
+
     <string name="request_permision">Request permission</string>
 </resources>

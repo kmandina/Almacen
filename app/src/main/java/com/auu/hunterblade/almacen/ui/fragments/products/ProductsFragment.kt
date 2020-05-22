@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -15,6 +16,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -48,7 +50,6 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
-import kotlin.math.roundToLong
 
 class ProductsFragment : Fragment() {
 
@@ -92,7 +93,7 @@ class ProductsFragment : Fragment() {
         val recycler = view.findViewById<RecyclerView>(R.id.products)
         val addProd = view.findViewById<FloatingActionButton>(R.id.addProd)
 
-        val adapter = ListProdsAdapter()
+        val adapter = ListProdsAdapter(viewModel)
         recycler.adapter = adapter
         subscribeUi(adapter)
 
@@ -117,7 +118,8 @@ class ProductsFragment : Fragment() {
             val cancelProduct = d.findViewById<Button>(R.id.cancelProduct)
             val photo = d.findViewById<ImageView>(R.id.ibPhoto)
 
-            name.requestFocus()
+//            name.requestFocus()
+            showKeyboard(name)
 
             fun Validador(): Boolean {
                 var validado = true
@@ -202,7 +204,10 @@ class ProductsFragment : Fragment() {
                         val prod = Product(name.text.toString(), description.text.toString(), priceBuy.text.toString().toFloat(), priceSell.text.toString().toFloat(), mCurrentPhotoPath!!, amount.text.toString().toLong())
 
                         viewModel.addProduct(prod)
-
+                        mCurrentPhotoPath = ""
+                        _url.apply {
+                            value = mCurrentPhotoPath
+                        }
                         d.dismiss()
                     }else {
                         val prod = Product(name.text.toString(), description.text.toString(), priceBuy.text.toString().toFloat(), priceSell.text.toString().toFloat(), "", amount.text.toString().toLong())
@@ -453,6 +458,12 @@ class ProductsFragment : Fragment() {
 //            startActivity(intent)
             Log.d(TAG,"CLICK_IMAGE_REQUEST")
         }
+    }
+
+    fun showKeyboard(view: View) {
+        view.requestFocus()
+        val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(view, 0)
     }
 
     private fun verifyPermissionPickFromGallery() { //WRITE_EXTERNAL_STORAGE tiene implícito READ_EXTERNAL_STORAGE

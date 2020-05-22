@@ -2,7 +2,6 @@ package com.auu.hunterblade.almacen.ui.fragments.sells
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.EditText
@@ -11,8 +10,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -55,7 +52,7 @@ class SellListFragment : Fragment() {
         val tvEarn = view.findViewById<TextView>(R.id.tvEarn)
         val addSell = view.findViewById<FloatingActionButton>(R.id.addSell)
 
-        val adapter = ListSellsAdapter()
+        val adapter = ListSellsAdapter(viewModel)
         recycler.adapter = adapter
         subscribeUi(adapter)
 

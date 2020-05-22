@@ -5,17 +5,17 @@ import androidx.room.*
 @Entity(tableName = "product")
 data class Product(
 
-    @ColumnInfo(name = "name") val name: String,
+    @ColumnInfo(name = "name") var name: String,
 
-    @ColumnInfo(name = "description") val description: String,
+    @ColumnInfo(name = "description") var description: String,
 
-    @ColumnInfo(name = "price_buy") val priceBuy: Float,
+    @ColumnInfo(name = "price_buy") var priceBuy: Float,
 
-    @ColumnInfo(name = "price_sell") val priceSell: Float,
+    @ColumnInfo(name = "price_sell") var priceSell: Float,
 
-    @ColumnInfo(name = "photo") val photo: String,
+    @ColumnInfo(name = "photo") var photo: String,
 
-    @ColumnInfo(name = "amount") val amount: Long
+    @ColumnInfo(name = "amount") var amount: Long
 ) {
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var idProducto: Long = 0
 }

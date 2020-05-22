@@ -2,7 +2,6 @@ package com.auu.hunterblade.almacen.ui.fragments.sells
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.EditText
@@ -16,7 +15,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.auu.hunterblade.almacen.R
-import com.auu.hunterblade.almacen.data.Sell
 import com.auu.hunterblade.almacen.databinding.FragmentSellViewBinding
 import com.auu.hunterblade.almacen.ui.adapters.ListProdsSellAdapter
 import com.auu.hunterblade.almacen.utils.InjectorUtils
@@ -60,9 +58,7 @@ class SellFragment : Fragment() {
         val addProdSell = view.findViewById<FloatingActionButton>(R.id.addProdSell)
         val addNote = view.findViewById<FloatingActionButton>(R.id.addNote)
 
-        val adapter = ListProdsSellAdapter()
-        recyclerView.adapter = adapter
-        subscribeUi(adapter)
+        var bandera = true
 
         viewModel.sell.observe(viewLifecycleOwner){
 
@@ -70,7 +66,13 @@ class SellFragment : Fragment() {
 
             tvDate.text =  dateFormat.format(it.date.time)
             tvEarn.text = getString(R.string.product_earn) + " $${it.totalEarn}"
-//            viewModel.sell.removeObservers(viewLifecycleOwner)
+
+            if(bandera) {
+                val adapter = ListProdsSellAdapter(viewModel, it)
+                recyclerView.adapter = adapter
+                subscribeUi(adapter)
+                bandera = false
+            }
         }
 
         addProdSell.setOnClickListener {

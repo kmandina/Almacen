@@ -11,4 +11,6 @@ class ProductDetailViewModel internal constructor(
 
     val product = productRepository.getProduct(arg)
 
+    fun updateProduct(product: Product) = productRepository.updateProduct(product)
+
 }

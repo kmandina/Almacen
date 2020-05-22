@@ -1,11 +1,12 @@
 package com.auu.hunterblade.almacen.data
 
 import androidx.room.*
+import androidx.room.ForeignKey.CASCADE
 
 @Entity(
     tableName = "productSell",
     foreignKeys = [
-        ForeignKey(entity = Sell::class, parentColumns = ["id"], childColumns = ["sell_id"])
+        ForeignKey(entity = Sell::class, parentColumns = ["id"], childColumns = ["sell_id"], onDelete = CASCADE, onUpdate = CASCADE)
     ],
     indices = [Index("sell_id")]
 )

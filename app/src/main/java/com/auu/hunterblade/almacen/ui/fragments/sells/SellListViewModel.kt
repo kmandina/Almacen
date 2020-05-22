@@ -16,4 +16,6 @@ class SellListViewModel internal constructor(
 
     fun addSell(sell: Sell) = sellRepository.addSell(sell)
 
+    fun deleteSell(sell: Sell) = sellRepository.deleteSell(sell)
+
 }

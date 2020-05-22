@@ -1,6 +1,7 @@
 package com.auu.hunterblade.almacen.ui.adapters
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +9,13 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.auu.hunterblade.almacen.R
 import com.auu.hunterblade.almacen.data.Product
 import com.auu.hunterblade.almacen.databinding.ListItemProductsBinding
+import com.auu.hunterblade.almacen.ui.fragments.products.ProductViewModel
 import com.auu.hunterblade.almacen.ui.fragments.products.ProductsFragmentDirections
 
-class ListProdsAdapter : ListAdapter<Product, RecyclerView.ViewHolder>(ListProdDiffCallback()) {
+class ListProdsAdapter(val viewModel: ProductViewModel) : ListAdapter<Product, RecyclerView.ViewHolder>(ListProdDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ProductViewHolder(ListItemProductsBinding.inflate(
@@ -22,10 +25,23 @@ class ListProdsAdapter : ListAdapter<Product, RecyclerView.ViewHolder>(ListProdD
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val prod = getItem(position)
         (holder as ProductViewHolder).bind(prod)
+
+        holder.binding.ibClear.setOnClickListener {
+
+            val context = it.context
+
+            AlertDialog.Builder(context)
+                .setTitle(context.getString(R.string.notification))
+                .setMessage(context.getString(R.string.alert_delete))
+                .setNegativeButton(context.getString(R.string.cancel)) { _, _ ->   }
+                .setPositiveButton(context.getString(R.string.accept)) { _, _ ->  viewModel.deleteProduct(prod) }
+                .show()
+
+        }
     }
 
     class ProductViewHolder(
-        private val binding: ListItemProductsBinding
+         val binding: ListItemProductsBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {

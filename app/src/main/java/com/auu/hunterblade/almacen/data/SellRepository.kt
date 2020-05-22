@@ -89,12 +89,12 @@ class SellRepository private constructor(private val sellDao: SellDao, private v
         }
 
     }
-    fun deleteProductSell(productSell: ProductSell, amount: Float, id: Long) {
+    fun deleteProductSell(productSell: ProductSell, sell: Sell) {
 
         CoroutineScope(Dispatchers.IO).launch {
 
             productSellDao.deleteProductSell(productSell)
-            sellDao.updateSellEarnById(id, amount - productSell.earnSell)
+            sellDao.updateSellEarnById(sell.idSell, sell.totalEarn - productSell.earnSell)
 
         }
 

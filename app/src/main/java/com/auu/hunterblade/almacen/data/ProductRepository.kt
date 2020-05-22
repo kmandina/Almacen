@@ -10,6 +10,15 @@ class ProductRepository private constructor(private val productDao: ProductDao) 
 
     fun getProduct(id: Long) = productDao.getProduct(id)
 
+    fun deleteProduct(product: Product){
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            productDao.deleteProduct(product)
+
+        }
+
+    }
 
     fun deleteAllProducts() {
 
@@ -48,6 +57,16 @@ class ProductRepository private constructor(private val productDao: ProductDao) 
             productDao.updateProductById(id, value)
 
         }
+    }
+
+    fun updateProduct(product: Product){
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            productDao.updateProduct(product)
+
+        }
+
     }
 
     companion object {

@@ -40,14 +40,45 @@
                 app:titleEnabled="false"
                 app:toolbarId="@id/toolbar">
 
-                <ImageView
-                    android:id="@+id/detail_image"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/product_detail_app_bar_height"
-                    android:fitsSystemWindows="true"
-                    android:scaleType="centerCrop"
-                    app:imageFromUrl="@{viewModel.product.photo}"
-                    app:layout_collapseMode="parallax" />
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/detail_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/product_detail_app_bar_height"
+                        android:fitsSystemWindows="true"
+                        android:scaleType="centerCrop"
+                        app:imageFromUrl="@{viewModel.product.photo}"
+                        app:layout_collapseMode="parallax"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <ImageButton
+                        android:layout_margin="10dp"
+                        android:background="@drawable/background_indicator_negro"
+                        app:layout_constraintEnd_toStartOf="@+id/modifyPhoto"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_modify"
+                        android:id="@+id/ibModifyP"/>
+
+                    <ImageButton
+                        android:background="@drawable/background_indicator_negro"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/modifyPhoto"
+                        android:src="@drawable/ic_modify_a_photo"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -63,6 +94,21 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
+
+            <EditText
+                android:visibility="invisible"
+                android:id="@+id/etProduct_detail_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:gravity="center_horizontal"
+                android:text="@{viewModel.product.name}"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appbar"
+                tools:text="Apple"/>
 
             <TextView
                 android:id="@+id/product_detail_name"
@@ -93,6 +139,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/product_detail_name" />
 
+            <EditText
+                android:visibility="invisible"
+                android:id="@+id/etDescription"
+                android:layout_width="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_description"
+                android:text="@{viewModel.product.description}"
+                tools:text="Product Decription"/>
+
             <TextView
                 android:id="@+id/description"
                 android:layout_width="0dp"
@@ -107,51 +168,104 @@
                 android:text="@{viewModel.product.description}"
                 tools:text="Product Decription" />
 
-        <TextView
-            android:textAlignment="center"
-            android:id="@+id/producto_item_BuyPrice"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/producto_item_SellPrice"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description"
-            app:setFloatBuy="@{viewModel.product.priceBuy}"
-            tools:text="Buy Price" />
+            <EditText
+                android:inputType="number|numberDecimal"
+                android:visibility="invisible"
+                android:textAlignment="center"
+                android:id="@+id/edProducto_item_BuyPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/etProducto_item_SellPrice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etDescription"
+                app:setFloatBuy="@{viewModel.product.priceBuy}"
+                tools:text="Buy Price" />
 
-        <TextView
-            android:textAlignment="center"
-            android:id="@+id/producto_item_SellPrice"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="15dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/producto_item_amount"
-            app:layout_constraintStart_toEndOf="@+id/producto_item_BuyPrice"
-            app:layout_constraintTop_toBottomOf="@+id/description"
-            app:setFloatSell="@{viewModel.product.priceSell}"
-            tools:text="Sell Price" />
+            <TextView
+                android:textAlignment="center"
+                android:id="@+id/producto_item_BuyPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/producto_item_SellPrice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description"
+                app:setFloatBuy="@{viewModel.product.priceBuy}"
+                tools:text="Buy Price" />
 
-        <TextView
-            android:textAlignment="center"
-            android:id="@+id/producto_item_amount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="15dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/producto_item_SellPrice"
-            app:layout_constraintTop_toBottomOf="@+id/description"
-            app:setLong="@{viewModel.product.amount}"
-            tools:text="Product Amount" />
+            <EditText
+                android:inputType="number|numberDecimal"
+                android:visibility="invisible"
+                android:textAlignment="center"
+                android:id="@+id/etProducto_item_SellPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/etProducto_item_amount"
+                app:layout_constraintStart_toEndOf="@+id/edProducto_item_BuyPrice"
+                app:layout_constraintTop_toBottomOf="@+id/etDescription"
+                app:setFloatSell="@{viewModel.product.priceSell}"
+                tools:text="Sell Price" />
+
+
+            <TextView
+                android:textAlignment="center"
+                android:id="@+id/producto_item_SellPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/producto_item_amount"
+                app:layout_constraintStart_toEndOf="@+id/producto_item_BuyPrice"
+                app:layout_constraintTop_toBottomOf="@+id/description"
+                app:setFloatSell="@{viewModel.product.priceSell}"
+                tools:text="Sell Price" />
+
+            <EditText
+                android:inputType="number"
+                android:visibility="invisible"
+                android:textAlignment="center"
+                android:id="@+id/etProducto_item_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/etProducto_item_SellPrice"
+                app:layout_constraintTop_toBottomOf="@+id/etDescription"
+                app:setLong="@{viewModel.product.amount}"
+                tools:text="Product Amount" />
+
+            <TextView
+                android:textAlignment="center"
+                android:id="@+id/producto_item_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/producto_item_SellPrice"
+                app:layout_constraintTop_toBottomOf="@+id/description"
+                app:setLong="@{viewModel.product.amount}"
+                tools:text="Product Amount" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

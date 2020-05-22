@@ -14,4 +14,6 @@ class ProductViewModel internal constructor(
 
     fun updateProductById(id: Long, value: Long) = productRepository.updateProductById(id, value)
 
+    fun deleteProduct(product: Product) = productRepository.deleteProduct(product)
+
 }
