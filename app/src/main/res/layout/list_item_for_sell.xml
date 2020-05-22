@@ -15,9 +15,6 @@
             name="id"
             type="long"/>
         <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener"/>
-        <variable
             name="product"
             type="com.auu.hunterblade.almacen.data.Product"/>
     </data>
@@ -29,7 +26,6 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:onClick="@{clickListener}"
         app:cardElevation="8dp"
         app:cardPreventCornerOverlap="false"
         >

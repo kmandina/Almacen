@@ -10,7 +10,9 @@ data class Sell (
 
     @ColumnInfo(name = "date") val date: Calendar = Calendar.getInstance(),
 
-    @ColumnInfo(name = "totalEarn") val totalEarn: Float = 0.0f
+    @ColumnInfo(name = "totalEarn") val totalEarn: Float = 0.0f,
+
+    @ColumnInfo(name = "note") val note: String
 
 ){
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var idSell: Long = 0

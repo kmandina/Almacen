@@ -1,6 +1,8 @@
 package com.auu.hunterblade.almacen.utils
 
 import android.content.Context
+import android.os.Build
+import android.os.Environment
 import com.auu.hunterblade.almacen.data.AppDatabase
 import com.auu.hunterblade.almacen.data.ProductRepository
 import com.auu.hunterblade.almacen.data.SellRepository
@@ -8,6 +10,7 @@ import com.auu.hunterblade.almacen.ui.fragments.products.ProductDetailViewModelF
 import com.auu.hunterblade.almacen.ui.fragments.products.ProductViewModelFactory
 import com.auu.hunterblade.almacen.ui.fragments.sells.SellListViewModelFactory
 import com.auu.hunterblade.almacen.ui.fragments.sells.SellViewModelFactory
+import java.io.File
 
 /**
  * Static methods used to inject classes needed for various Activities and Fragments.
@@ -54,4 +57,22 @@ object InjectorUtils {
         return SellViewModelFactory(getSellRepository(context), id)
     }
 
+    fun AppFileDir(context: Context): File {
+
+        return if(Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED)
+        {
+            context.getExternalFilesDir(null)!!
+        }else {
+            context.filesDir
+        }
+    }
+
+    fun getExternalStorageDirectoryCustom(context: Context): File {
+
+        return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            Environment.getExternalStorageDirectory()
+        }else {
+            AppFileDir(context)
+        }
+    }
 }

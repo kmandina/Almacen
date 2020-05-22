@@ -30,24 +30,6 @@ class ListProdsSellAdapter : ListAdapter<ProductSell, RecyclerView.ViewHolder>(L
     class ProductSellViewHolder(
         private val binding: ListItemProductsSellsBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        init {
-//            binding.setClickListener {
-//                binding.product?.let { item ->
-//                    navigateToProduct(item, it)
-//                }
-//            }
-        }
-
-//        private fun navigateToProduct(
-//            item: ProductSell,
-//            view: View
-//        ) {
-//            val direction =
-//                ProductsFragmentDirections.actionNavigationProductListToNavigationProductDetail(
-//                    item.idProducto
-//                )
-//            view.findNavController().navigate(direction)
-//        }
 
         fun bind(item: ProductSell) {
             binding.apply {

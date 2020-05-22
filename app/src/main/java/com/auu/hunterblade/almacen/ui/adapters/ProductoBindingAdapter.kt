@@ -1,5 +1,7 @@
 package com.auu.hunterblade.almacen.ui.adapters
 
+import android.net.Uri
+import android.provider.SyncStateContract
 import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.ImageView
@@ -9,6 +11,9 @@ import androidx.databinding.BindingAdapter
 import androidx.preference.PreferenceManager
 import com.auu.hunterblade.almacen.R
 import com.auu.hunterblade.almacen.data.Sell
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -17,7 +22,7 @@ import java.util.*
 fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
     if (!imageUrl.isNullOrEmpty()) {
 
-        val sp = PreferenceManager.getDefaultSharedPreferences(view.context)
+//        val sp = PreferenceManager.getDefaultSharedPreferences(view.context)
 //        val downloadType = sp.getString("downloadType", "2")
 //        val urlSite = URL_Site(view.context)
 //        urlSite.abrir()
@@ -32,46 +37,29 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
 //
 //        }
 //
-//        val urlOut = "$pathIn/$imageUrl"
-//        val directory = File(urlOut)
-//        if (!directory.exists()) {
-//
-//            Glide.with(view.context)
-//                    .load(R.drawable.launcherb)
-//                    .transition(DrawableTransitionOptions.withCrossFade())
-//                    .into(view)
-//
-//            if(isNetworkConnected(view.context)){
-//
-//                val bandera2 = sp.getBoolean("updateSwitch", true)
-//                val localip: String
-//                if (bandera2) {
-//                    localip = SyncStateContract.Constants.IP_VPS.IP
-//                } else {
-//                    val ip = IP(view.context)
-//                    ip.abrir()
-//                    localip = "https://" + ip.first
-//                    ip.cerrar()
-//                }
-//
-//                val b = "$localip/uploads/$imageUrl"
-//                        ServiceUpdateDB.startActionBaz(view.context, b)
-//            }
-//
-//        }else {
-//
-//            Glide.with(view.context)
-//                    .load(Uri.parse("file:///$urlOut"))
-//                    .transition(DrawableTransitionOptions.withCrossFade())
-//                    .into(view)
-//        }
-//
-//
-//    }else {
-//        Glide.with(view.context)
-//        .load(R.drawable.launcherb)
-//        .transition(DrawableTransitionOptions.withCrossFade())
-//        .into(view);
+//        val urlOut = "$imageUrl"
+        val directory = File(imageUrl)
+        if (!directory.exists()) {
+
+            Glide.with(view.context)
+                    .load(R.drawable.ic_crop_original)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(view)
+
+        }else {
+
+            Glide.with(view.context)
+                    .load(Uri.parse("file:///$imageUrl"))
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(view)
+        }
+
+
+    }else {
+        Glide.with(view.context)
+        .load(R.drawable.ic_crop_original)
+        .transition(DrawableTransitionOptions.withCrossFade())
+        .into(view);
     }
 }
 

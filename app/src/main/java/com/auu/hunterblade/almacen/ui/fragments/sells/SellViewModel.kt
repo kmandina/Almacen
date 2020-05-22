@@ -8,7 +8,7 @@ import com.auu.hunterblade.almacen.data.SellRepository
 
 class SellViewModel internal constructor(
     private val sellRepository: SellRepository,
-    arg: Long
+    private val arg: Long
 ) : ViewModel() {
 
     val sellList = sellRepository.getProductSellByIdSell(arg)
@@ -17,4 +17,5 @@ class SellViewModel internal constructor(
 
     fun addProductSell(product: ProductSell, s: Sell) =  sellRepository.addProductSell(product, s)
 
+    fun updateSell(note: String) = sellRepository.updateSellNote(arg, note)
 }

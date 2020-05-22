@@ -34,7 +34,10 @@ interface SellDao {
     fun getSellProductsById(id: Long): LiveData<SellAndProductSell>
 
     @Query("UPDATE sell SET totalEarn = :value WHERE id = :id")
-    fun updateSellById(id: Long, value: Float)
+    fun updateSellEarnById(id: Long, value: Float)
+
+    @Query("UPDATE sell SET note = :value WHERE id = :id")
+    fun updateSellNoteById(id: Long, value: String)
 
     @Update
     fun updateSell(sell: Sell)

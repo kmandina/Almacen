@@ -28,6 +28,11 @@
     <string name="product_sell_title_insert">Producto a Vender</string>
     <string name="product_sell_amount">Cantidad del Producto a Vender</string>
 
+    <string name="producto_detail_description">Descripción</string>
+
+    <string name="sell_title">Venta</string>
+    <string name="sell_note">Escriba una Nota</string>
+
     <!-- Alerts and Actions -->
     <string name="action_cancel">Cancelar</string>
     <string name="action_accept">Aceptar</string>
@@ -42,4 +47,7 @@
     <string name="alert_empty_amount">Escriba un valor de la cantidad de productos</string>
     <string name="alert_overflow_amount">El valor es mayor que la cantidad de productos exitente</string>
 
+    <string name="alert_overflow_note">La cantidad máxima de caracteres es 20</string>
+
+    <string name="request_permision">Solicitud de permiso</string>
 </resources>

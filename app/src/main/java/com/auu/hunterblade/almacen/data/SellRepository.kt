@@ -33,6 +33,15 @@ class SellRepository private constructor(private val sellDao: SellDao, private v
 
     }
 
+    fun updateSellNote(id: Long, note: String) {
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            sellDao.updateSellNoteById(id, note)
+        }
+
+    }
+
     fun deleteSell(sell: Sell) {
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -67,7 +76,7 @@ class SellRepository private constructor(private val sellDao: SellDao, private v
         CoroutineScope(Dispatchers.IO).launch {
 
             productSellDao.insert(productSell)
-            sellDao.updateSellById(sell.idSell, sell.totalEarn + productSell.earnSell)
+            sellDao.updateSellEarnById(sell.idSell, sell.totalEarn + productSell.earnSell)
         }
 
     }
@@ -85,7 +94,7 @@ class SellRepository private constructor(private val sellDao: SellDao, private v
         CoroutineScope(Dispatchers.IO).launch {
 
             productSellDao.deleteProductSell(productSell)
-            sellDao.updateSellById(id, amount - productSell.earnSell)
+            sellDao.updateSellEarnById(id, amount - productSell.earnSell)
 
         }
 

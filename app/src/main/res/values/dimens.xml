@@ -3,7 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="product_detail_app_bar_height">278dp</dimen>
+    <dimen name="product_detail_app_bar_height">320dp</dimen>
 
     <dimen name="toolbar_elevation">5dp</dimen>
 

@@ -7,20 +7,17 @@
         <variable
             name="viewModel"
             type="com.auu.hunterblade.almacen.ui.fragments.products.ProductDetailViewModel" />
-        <variable
-            name="callback"
-            type="com.auu.hunterblade.almacen.ui.fragments.products.ProductDetailFragment.Callback" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:background="?attr/colorSurface"
-        tools:context="com.auu.hunterblade.almacen.MainActivity"
-        tools:ignore="MergeRootFrame">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/product_detail_app_bar_height"
@@ -57,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@android:color/transparent"
-                    app:titleTextColor="?attr/colorOnSurface"
+                    app:titleTextColor="@color/colorPrimary"
                     app:layout_collapseMode="pin"
                     app:contentInsetStartWithNavigation="0dp"
                     app:navigationIcon="@drawable/ic_detail_back"
@@ -67,95 +64,95 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/plant_detail_scrollview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingBottom="@dimen/fab_bottom_padding"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <TextView
+                android:id="@+id/product_detail_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:gravity="center_horizontal"
+                android:text="@{viewModel.product.name}"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appbar"
+                tools:text="Apple" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/margin_normal">
+            <TextView
+                android:id="@+id/title_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:gravity="center_horizontal"
+                android:text="@string/producto_detail_description"
+                android:textColor="?attr/colorAccent"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/product_detail_name" />
 
-                <TextView
-                    android:id="@+id/plant_detail_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_small"
-                    android:gravity="center_horizontal"
-                    android:text="@{viewModel.product.name}"
-                    android:textAppearance="?attr/textAppearanceHeadline5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Apple" />
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_description"
+                android:text="@{viewModel.product.description}"
+                tools:text="Product Decription" />
 
-                <TextView
-                    android:id="@+id/plant_watering_header"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginTop="@dimen/margin_normal"
-                    android:layout_marginEnd="@dimen/margin_small"
-                    android:gravity="center_horizontal"
-                    android:text="MUela"
-                    android:textColor="?attr/colorAccent"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/plant_detail_name" />
+        <TextView
+            android:textAlignment="center"
+            android:id="@+id/producto_item_BuyPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/producto_item_SellPrice"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description"
+            app:setFloatBuy="@{viewModel.product.priceBuy}"
+            tools:text="Buy Price" />
 
-                <TextView
-                    android:id="@+id/plant_watering"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_small"
-                    android:gravity="center_horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/plant_watering_header"
-                    android:text="@{viewModel.product.description}"
-                    tools:text="every 7 days" />
+        <TextView
+            android:textAlignment="center"
+            android:id="@+id/producto_item_SellPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/producto_item_amount"
+            app:layout_constraintStart_toEndOf="@+id/producto_item_BuyPrice"
+            app:layout_constraintTop_toBottomOf="@+id/description"
+            app:setFloatSell="@{viewModel.product.priceSell}"
+            tools:text="Sell Price" />
 
-                <TextView
-                    android:id="@+id/plant_description"
-                    style="?android:attr/textAppearanceMedium"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_small"
-                    android:textIsSelectable="true"
-                    android:minHeight="@dimen/product_description_min_height"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/plant_watering"
-                    app:renderHtml="@{viewModel.product.description}"
-                    tools:text="Details about the plant" />
+        <TextView
+            android:textAlignment="center"
+            android:id="@+id/producto_item_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/producto_item_SellPrice"
+            app:layout_constraintTop_toBottomOf="@+id/description"
+            app:setLong="@{viewModel.product.amount}"
+            tools:text="Product Amount" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.core.widget.NestedScrollView>
-
-<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--            android:id="@+id/fab"-->
-<!--            style="@style/Widget.MaterialComponents.FloatingActionButton"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="@dimen/fab_margin"-->
-<!--            android:onClick="@{() -> callback.add(viewModel.plant)}"-->
-<!--            android:tint="@android:color/white"-->
-<!--            app:shapeAppearance="@style/ShapeAppearance.Sunflower.FAB"-->
-<!--            app:isGone="@{viewModel.isPlanted}"-->
-<!--            app:layout_anchor="@id/appbar"-->
-<!--            app:layout_anchorGravity="bottom|end"-->
-<!--            app:srcCompat="@drawable/ic_plus" />-->
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

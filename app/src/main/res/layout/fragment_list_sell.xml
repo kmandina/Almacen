@@ -52,7 +52,7 @@
             </com.google.android.material.appbar.AppBarLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/addProd"
+                android:id="@+id/addSell"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="wrap_content"

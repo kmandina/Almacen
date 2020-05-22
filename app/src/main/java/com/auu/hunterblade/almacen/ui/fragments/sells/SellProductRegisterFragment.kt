@@ -9,13 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.auu.hunterblade.almacen.databinding.FragmentProductsBinding
+import androidx.recyclerview.widget.RecyclerView
+import com.auu.hunterblade.almacen.R
 import com.auu.hunterblade.almacen.databinding.FragmentSellProductRegisterBinding
-import com.auu.hunterblade.almacen.ui.adapters.ListProdsAdapter
 import com.auu.hunterblade.almacen.ui.adapters.ListProdsForSellAdapter
 import com.auu.hunterblade.almacen.ui.fragments.products.ProductViewModel
 import com.auu.hunterblade.almacen.utils.InjectorUtils
+
 
 class SellProductRegisterFragment : Fragment() {
 
@@ -38,15 +40,6 @@ class SellProductRegisterFragment : Fragment() {
 
         context ?: return binding.root
 
-        viewModelSell.sell.observe(viewLifecycleOwner){
-
-            val adapter = ListProdsForSellAdapter(args.id, viewModelSell, viewModelProducts)
-            binding.products.adapter = adapter
-            subscribeUi(adapter)
-            viewModelSell.sell.removeObservers(viewLifecycleOwner)
-
-        }
-
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         binding.toolbar.setNavigationOnClickListener { view ->
@@ -54,6 +47,23 @@ class SellProductRegisterFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val recycler = view.findViewById<RecyclerView>(R.id.products)
+
+        viewModelSell.sell.observe(viewLifecycleOwner){
+
+            val adapter = ListProdsForSellAdapter(args.id, viewModelSell, viewModelProducts, findNavController())
+            recycler.adapter = adapter
+            subscribeUi(adapter)
+            viewModelSell.sell.removeObservers(viewLifecycleOwner)
+
+        }
+
+
     }
 
     private fun subscribeUi(adapter: ListProdsForSellAdapter) {
