@@ -128,10 +128,22 @@ fun bindFloatTextEarn(textView: TextView, v: Float) {
     textView.text = textView.context.getString(R.string.product_earn) + " $$v"
 }
 
-@BindingAdapter("setLong")
-fun bindFloatText(textView: TextView, v: Long) {
+@BindingAdapter("setFloat")
+fun bindFloatText(textView: TextView, v: Float) {
+
+    textView.text = v.toString()
+}
+
+@BindingAdapter("setLongAmount")
+fun bindLongTextAmount(textView: TextView, v: Long) {
 
     textView.text = textView.context.getString(R.string.product_amount) + " $v"
+}
+
+@BindingAdapter("setLong")
+fun bindLongText(textView: TextView, v: Long) {
+
+    textView.text = v.toString()
 }
 
 @BindingAdapter("setDateSell")

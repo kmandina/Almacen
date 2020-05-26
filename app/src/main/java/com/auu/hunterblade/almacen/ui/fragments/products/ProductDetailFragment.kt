@@ -6,6 +6,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
 import android.graphics.*
 import android.net.Uri
 import android.os.Build
@@ -101,8 +102,10 @@ class ProductDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val modifyPhoto = view.findViewById<ImageButton>(R.id.modifyPhoto)
         val detailImage = view.findViewById<ImageView>(R.id.detail_image)
+
+        val gallery = view.findViewById<ImageButton>(R.id.ibModifyGallery)
+        val camara = view.findViewById<ImageButton>(R.id.modifyPhoto)
 
         val modify = view.findViewById<ImageButton>(R.id.ibModifyP)
         val editName = view.findViewById<EditText>(R.id.etProduct_detail_name)
@@ -213,8 +216,38 @@ class ProductDetailFragment : Fragment() {
 
         }
 
-        modifyPhoto.setOnClickListener {
+        camara.setOnClickListener {
             verifyPermissionTakePicture()
+        }
+        gallery.setOnClickListener {
+            verifyPermissionPickFromGallery()
+        }
+    }
+
+    private fun verifyPermissionPickFromGallery() { //WRITE_EXTERNAL_STORAGE tiene implícito READ_EXTERNAL_STORAGE
+//porque pertenecen al mismo grupo de permisos
+        val PERMISSIONS = arrayOf(
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+        )
+        var writePermission = 0
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            writePermission = ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+        }
+        if (writePermission != PackageManager.PERMISSION_GRANTED) {
+            solicitarMultiplesPermiso(PERMISSIONS, "Sin el permiso" +
+                    "   administrar ficheros no puede copiar los datos.",
+                PICK_IMAGE_REQUEST, requireActivity())
+        } else {
+            val intent = Intent(
+                Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            )
+            intent.type = "image/*"
+            startActivityForResult(intent, PICK_IMAGE_REQUEST)
         }
     }
 
@@ -238,6 +271,20 @@ class ProductDetailFragment : Fragment() {
         } else {
             dispatchTakePictureIntent()
         }
+    }
+
+    fun getRealPathFromURI(uri: Uri): String? {
+        val filePathColumn =
+            arrayOf(MediaStore.Images.Media.DATA)
+        val cursor: Cursor? = requireContext().contentResolver.query(uri, filePathColumn, null, null, null)
+        var picturePath: String? = null
+        if (cursor != null) {
+            cursor.moveToFirst()
+            val columnIndex: Int = cursor.getColumnIndex(filePathColumn[0])
+            picturePath = cursor.getString(columnIndex)
+            cursor.close()
+        }
+        return picturePath
     }
 
     //Creating a path for the captured image to be saved. Using this path we can retrieve the original Image.
@@ -431,11 +478,14 @@ class ProductDetailFragment : Fragment() {
     ) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
-//            val uri: Uri? = data.data
-//            val finalFile = File(getRealPathFromURI(uri))
-//            val intent = Intent(this@M, detailedActivity::class.java)
-//            intent.putExtra("PATH", finalFile.path)
-//            startActivity(intent)
+            val uri: Uri? = data.data
+            if(uri != null){
+                val finalFile = File(getRealPathFromURI(uri)!!)
+                mCurrentPhotoPath = finalFile.absolutePath
+                _url.apply {
+                    value = mCurrentPhotoPath
+                }
+            }
 
             Log.d(TAG,"PICK_IMAGE_REQUEST")
         } else if (requestCode == CLICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
@@ -520,19 +570,46 @@ class ProductDetailFragment : Fragment() {
     // Should be used when user presses a share button/menu item.
     @Suppress("DEPRECATION")
     private fun createShareIntent() {
-//        val shareText = plantDetailViewModel.plant.value.let { plant ->
-//            if (plant == null) {
-//                ""
-//            } else {
-//                getString(R.string.share_text_plant, plant.name)
-//            }
-//        }
-        val shareIntent = ShareCompat.IntentBuilder.from(requireActivity())
-            .setText("shareText")
-            .setType("text/plain")
-            .createChooserIntent()
-            .addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
-        startActivity(shareIntent)
+
+        viewModelP.product.value.let { p ->
+
+            if(p != null) {
+
+                val file = File(p.photo)
+                if (file.exists()) {
+                    val whatsappIntent = Intent(Intent.ACTION_SEND)
+                    whatsappIntent.type = "image/*"
+                    whatsappIntent.putExtra(
+                        Intent.EXTRA_TEXT,
+                        getString(R.string.share_name) + p.name + "\n"
+                                + getString(R.string.share_description) + p.description + "\n"
+                                + getString(R.string.share_price) + p.priceSell
+                    )
+                    val imageUri = FileProvider.getUriForFile(
+                        requireContext(),
+                        BuildConfig.APPLICATION_ID + ".provider",  //(use your app signature + ".provider" )
+                        file
+                    )
+                    whatsappIntent.putExtra(Intent.EXTRA_STREAM, imageUri) //add image path
+                    whatsappIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    requireContext().startActivity(
+                        Intent.createChooser(
+                            whatsappIntent,
+                            getString(R.string.alert_selection_sharing)
+                        )
+                    )
+                } else {
+                    val shareIntent = ShareCompat.IntentBuilder.from(requireActivity())
+                        .setText(getString(R.string.share_name) + p.name + "\n"
+                                + getString(R.string.share_description) + p.description + "\n"
+                                + getString(R.string.share_price) + p.priceSell)
+                        .setType("text/plain")
+                        .createChooserIntent()
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                    startActivity(shareIntent)
+                }
+            }
+        }
     }
 
     companion object {

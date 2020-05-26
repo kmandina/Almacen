@@ -61,7 +61,7 @@
                     <ImageButton
                         android:layout_margin="10dp"
                         android:background="@drawable/background_indicator_negro"
-                        app:layout_constraintEnd_toStartOf="@+id/modifyPhoto"
+                        app:layout_constraintEnd_toStartOf="@+id/ibModifyGallery"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -69,6 +69,19 @@
                         android:id="@+id/ibModifyP"/>
 
                     <ImageButton
+                        android:layout_margin="10dp"
+                        android:background="@drawable/background_indicator_negro"
+                        app:layout_constraintStart_toEndOf="@+id/modifyPhoto"
+                        app:layout_constraintEnd_toStartOf="@+id/ibModifyP"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_gallery"
+                        android:id="@+id/ibModifyGallery"/>
+
+
+                    <ImageButton
+                        app:layout_constraintStart_toEndOf="@+id/ibModifyGallery"
                         android:background="@drawable/background_indicator_negro"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -182,7 +195,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/etProducto_item_SellPrice"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etDescription"
-                app:setFloatBuy="@{viewModel.product.priceBuy}"
+                app:setFloat="@{viewModel.product.priceBuy}"
                 tools:text="Buy Price" />
 
             <TextView
@@ -214,7 +227,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/etProducto_item_amount"
                 app:layout_constraintStart_toEndOf="@+id/edProducto_item_BuyPrice"
                 app:layout_constraintTop_toBottomOf="@+id/etDescription"
-                app:setFloatSell="@{viewModel.product.priceSell}"
+                app:setFloat="@{viewModel.product.priceSell}"
                 tools:text="Sell Price" />
 
 
@@ -264,7 +277,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/producto_item_SellPrice"
                 app:layout_constraintTop_toBottomOf="@+id/description"
-                app:setLong="@{viewModel.product.amount}"
+                app:setLongAmount="@{viewModel.product.amount}"
                 tools:text="Product Amount" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

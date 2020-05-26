@@ -20,13 +20,36 @@
 
     <ImageView
         android:layout_margin="5dp"
-        android:src="@drawable/ic_add_a_photo"
+        android:src="@drawable/ic_crop_original"
         android:id="@+id/ibPhoto"
         app:layout_constraintTop_toBottomOf="@+id/tvProduct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="120dp"
         android:layout_height="120dp"/>
+
+
+    <ImageButton
+        android:layout_margin="10dp"
+        android:background="@drawable/background_indicator_negro"
+        app:layout_constraintStart_toEndOf="@+id/modifyPhoto"
+        app:layout_constraintBottom_toBottomOf="@+id/ibPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_gallery"
+        android:id="@+id/ibModifyGallery"/>
+
+
+    <ImageButton
+        app:layout_constraintStart_toEndOf="@+id/ibModifyGallery"
+        android:background="@drawable/background_indicator_negro"
+        app:layout_constraintEnd_toEndOf="@+id/ibPhoto"
+        app:layout_constraintBottom_toBottomOf="@+id/ibPhoto"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/modifyPhoto"
+        android:src="@drawable/ic_modify_a_photo"/>
 
     <EditText
         android:textAlignment="center"

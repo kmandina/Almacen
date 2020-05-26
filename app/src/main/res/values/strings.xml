@@ -51,9 +51,15 @@
 
     <string name="alert_delete">Do you want to delete the item?</string>
 
+    <string name="alert_file_not_found">File not found</string>
+    <string name="alert_selection_sharing">Select the app for sharing</string>
+
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
     <string name="notification">Notification</string>
+    <string name="share_name">Name: </string>
+    <string name="share_description">Description: </string>
+    <string name="share_price">Price: </string>
 
     <string name="request_permision">Request permission</string>
 </resources>

@@ -11,10 +11,12 @@ import com.auu.hunterblade.almacen.R
 import com.auu.hunterblade.almacen.data.ProductSell
 import com.auu.hunterblade.almacen.data.Sell
 import com.auu.hunterblade.almacen.databinding.ListItemProductsSellsBinding
+import com.auu.hunterblade.almacen.ui.fragments.products.ProductViewModel
 import com.auu.hunterblade.almacen.ui.fragments.sells.SellViewModel
 
 class ListProdsSellAdapter(
     val viewModel: SellViewModel,
+    val prods: ProductViewModel,
     val sell: Sell
 ) : ListAdapter<ProductSell, RecyclerView.ViewHolder>(ListProdSellDiffCallback()) {
 
@@ -36,7 +38,18 @@ class ListProdsSellAdapter(
                 .setTitle(context.getString(R.string.notification))
                 .setMessage(context.getString(R.string.alert_delete))
                 .setNegativeButton(context.getString(R.string.cancel)) { _, _ ->   }
-                .setPositiveButton(context.getString(R.string.accept)) { _, _ ->  viewModel.deleteSell(prod, sell) }
+                .setPositiveButton(context.getString(R.string.accept)) { _, _ ->
+
+                    viewModel.deleteSell(prod, sell)
+
+                    prods.getProduct(prod.idProduct).let { pro ->
+
+                        if(pro.value != null){
+                            prods.updateProductById(prod.idProduct, pro.value!!.amount + prod.amountSell)
+                        }
+
+                    }
+                }
                 .show()
 
         }

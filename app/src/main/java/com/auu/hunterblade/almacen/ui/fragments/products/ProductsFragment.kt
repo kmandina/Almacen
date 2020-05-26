@@ -118,6 +118,9 @@ class ProductsFragment : Fragment() {
             val cancelProduct = d.findViewById<Button>(R.id.cancelProduct)
             val photo = d.findViewById<ImageView>(R.id.ibPhoto)
 
+            val gallery = d.findViewById<ImageButton>(R.id.ibModifyGallery)
+            val camara = d.findViewById<ImageButton>(R.id.modifyPhoto)
+
 //            name.requestFocus()
             showKeyboard(name)
 
@@ -183,16 +186,20 @@ class ProductsFragment : Fragment() {
                 }else {
 
                     Glide.with(p.context)
-                        .load(R.drawable.ic_add_a_photo)
+                        .load(R.drawable.ic_crop_original)
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(photo)
                 }
 
             }
 
-            photo.setOnClickListener {
+            camara.setOnClickListener {
                 verifyPermissionTakePicture()
             }
+            gallery.setOnClickListener {
+                verifyPermissionPickFromGallery()
+            }
+
 
             cancelProduct.setOnClickListener { d.dismiss() }
 
@@ -436,8 +443,16 @@ class ProductsFragment : Fragment() {
     ) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
-//            val uri: Uri? = data.data
-//            val finalFile = File(getRealPathFromURI(uri))
+            val uri: Uri? = data.data
+            if(uri != null){
+                val finalFile = File(getRealPathFromURI(uri)!!)
+                mCurrentPhotoPath = finalFile.absolutePath
+                _url.apply {
+                    value = mCurrentPhotoPath
+                }
+            }
+
+
 //            val intent = Intent(this@M, detailedActivity::class.java)
 //            intent.putExtra("PATH", finalFile.path)
 //            startActivity(intent)

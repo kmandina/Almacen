@@ -51,9 +51,15 @@
 
     <string name="alert_delete">¿Desea eliminar el elemento?</string>
 
+    <string name="alert_file_not_found">Imagen no encontrada</string>
+    <string name="alert_selection_sharing">Seleccione la aplicación para compartir</string>
+
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
     <string name="notification">Notificación</string>
+    <string name="share_name">Nombre: </string>
+    <string name="share_description">Descripción: </string>
+    <string name="share_price">Precio: </string>
 
     <string name="request_permision">Solicitud de permiso</string>
 </resources>

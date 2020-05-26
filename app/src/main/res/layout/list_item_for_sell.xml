@@ -122,7 +122,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/producto_item_SellPrice"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:setLong="@{product.amount}"
+                app:setLongAmount="@{product.amount}"
                 tools:text="Product Amount" />
 
 

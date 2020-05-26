@@ -15,15 +15,34 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        config {
+            keyAlias 'bhrivchat'
+            keyPassword '123456a@'
+            storeFile file('../bhrivchat.jks')
+            storePassword '123456a@'
+        }
+    }
     buildTypes {
+
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            multiDexEnabled = true
+            minifyEnabled = true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.config
+            multiDexEnabled = true
+            minifyEnabled = false
+//            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -37,6 +56,14 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "Almacen"
+            outputFileName += "-vBeta" + variant.versionName + ".apk"
+
+        }
     }
 
 //    configurations.all() {
@@ -80,6 +107,10 @@ dependencies {
     implementation "com.google.code.gson:gson:2.8.6"
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
+
+    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

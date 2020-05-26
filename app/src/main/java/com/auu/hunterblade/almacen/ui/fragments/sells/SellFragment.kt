@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.auu.hunterblade.almacen.R
 import com.auu.hunterblade.almacen.databinding.FragmentSellViewBinding
 import com.auu.hunterblade.almacen.ui.adapters.ListProdsSellAdapter
+import com.auu.hunterblade.almacen.ui.fragments.products.ProductViewModel
 import com.auu.hunterblade.almacen.utils.InjectorUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
@@ -28,6 +29,10 @@ class SellFragment : Fragment() {
 
     private val viewModel: SellViewModel by viewModels {
         InjectorUtils.provideSellViewModelFactory(requireActivity(), args.id)
+    }
+
+    private val viewModelProducts: ProductViewModel by viewModels {
+        InjectorUtils.provideProductViewModelFactory(requireActivity())
     }
 
     override fun onCreateView(
@@ -68,7 +73,7 @@ class SellFragment : Fragment() {
             tvEarn.text = getString(R.string.product_earn) + " $${it.totalEarn}"
 
             if(bandera) {
-                val adapter = ListProdsSellAdapter(viewModel, it)
+                val adapter = ListProdsSellAdapter(viewModel, viewModelProducts, it)
                 recyclerView.adapter = adapter
                 subscribeUi(adapter)
                 bandera = false

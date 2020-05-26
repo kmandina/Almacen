@@ -16,4 +16,6 @@ class ProductViewModel internal constructor(
 
     fun deleteProduct(product: Product) = productRepository.deleteProduct(product)
 
+    fun getProduct(id: Long) = productRepository.getProduct(id)
+
 }
