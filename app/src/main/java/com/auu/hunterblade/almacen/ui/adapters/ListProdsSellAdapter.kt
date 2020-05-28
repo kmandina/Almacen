@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.observe
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,10 +17,15 @@ import com.auu.hunterblade.almacen.ui.fragments.products.ProductViewModel
 import com.auu.hunterblade.almacen.ui.fragments.sells.SellViewModel
 
 class ListProdsSellAdapter(
+    private val life: LifecycleOwner,
     val viewModel: SellViewModel,
     val prods: ProductViewModel,
-    val sell: Sell
+    var sell: Sell
 ) : ListAdapter<ProductSell, RecyclerView.ViewHolder>(ListProdSellDiffCallback()) {
+
+    fun submitSell(sell: Sell){
+        this.sell = sell
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ProductSellViewHolder(
@@ -42,11 +49,12 @@ class ListProdsSellAdapter(
 
                     viewModel.deleteSell(prod, sell)
 
-                    prods.getProduct(prod.idProduct).let { pro ->
+                    val p = prods.getProduct(prod.idProduct)
 
-                        if(pro.value != null){
-                            prods.updateProductById(prod.idProduct, pro.value!!.amount + prod.amountSell)
-                        }
+                    p.observe(life) { pro ->
+
+                        prods.updateProductById(prod.idProduct, pro.amount + prod.amountSell)
+                        p.removeObservers(life)
 
                     }
                 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Almacen</string>
+    <string name="app_name">Mis Ventas</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_products">Productos</string>
     <string name="title_statistics">Estadística</string>
@@ -12,6 +12,9 @@
     <string name="title_date">Fecha</string>
     <string name="title_earn">Ganancia</string>
 
+    <string name="titile_info">Información</string>
+
+    <string name="email_address">hunterbladek@gmail.com</string>
     <!-- CRUD -->
 
     <string name="product_title_insert">Producto</string>
@@ -39,6 +42,9 @@
     <string name="action_create">Crear</string>
     <string name="action_view_products">Ver Productos</string>
     <string name="action_view_sells">Ver Ventas</string>
+    <string name="action_feedback">Recomendaciones</string>
+    <string name="send_feedback_ask">¿Desea enviar sus criterios y sugerencias por correo electrónico?</string>
+    <string name="action_donate">Contribuir</string>
     <string name="menu_item_share_product">Compartir</string>
 
     <string name="alert_empty_name">Escriba un nombre para el producto</string>

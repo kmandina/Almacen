@@ -485,6 +485,20 @@ class ProductDetailFragment : Fragment() {
                 _url.apply {
                     value = mCurrentPhotoPath
                 }
+
+                viewModelP.product.let{
+
+                    if(it.value != null) {
+                        val p = it.value!!
+                        p.photo = if (mCurrentPhotoPath != null && mCurrentPhotoPath != "") {
+                            mCurrentPhotoPath!!
+                        } else {
+                            ""
+                        }
+
+                        viewModelP.updateProduct(p)
+                    }
+                }
             }
 
             Log.d(TAG,"PICK_IMAGE_REQUEST")
@@ -497,14 +511,18 @@ class ProductDetailFragment : Fragment() {
                 value = mCurrentPhotoPath
             }
 
-            viewModelP.product.observe(viewLifecycleOwner){ p ->
+            viewModelP.product.let{
 
-                p.photo = if(mCurrentPhotoPath != null && mCurrentPhotoPath != ""){
-                    mCurrentPhotoPath!!
-                }else { "" }
+                if(it.value != null) {
+                    val p = it.value!!
+                    p.photo = if (mCurrentPhotoPath != null && mCurrentPhotoPath != "") {
+                        mCurrentPhotoPath!!
+                    } else {
+                        ""
+                    }
 
-                viewModelP.updateProduct(p)
-
+                    viewModelP.updateProduct(p)
+                }
             }
 
 //            val d = data

@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Titles -->
-    <string name="app_name">Warehouse</string>
+    <string name="app_name">My Sells</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_products">Products</string>
     <string name="title_statistics">Statistics</string>
@@ -12,6 +12,9 @@
     <string name="title_date">Date</string>
     <string name="title_earn">Earns</string>
 
+    <string name="titile_info">Information</string>
+
+    <string name="email_address">hunterbladek@gmail.com</string>
     <!-- CRUD -->
 
     <string name="product_title_insert">Product</string>
@@ -39,6 +42,9 @@
     <string name="action_create">Create</string>
     <string name="action_view_products">Products View</string>
     <string name="action_view_sells">Sell View</string>
+    <string name="action_feedback">Feedback</string>
+    <string name="send_feedback_ask">Do you want to send any feedback by email?</string>
+    <string name="action_donate">Donate</string>
     <string name="menu_item_share_product">Share</string>
 
     <string name="alert_empty_name">Type a name</string>

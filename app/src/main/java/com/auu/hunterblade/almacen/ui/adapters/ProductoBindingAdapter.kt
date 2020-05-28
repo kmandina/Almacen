@@ -149,7 +149,7 @@ fun bindLongText(textView: TextView, v: Long) {
 @BindingAdapter("setDateSell")
 fun bindDateSellText(textView: TextView, sell: Sell) {
 
-    val dateFormat = SimpleDateFormat("MMM d, yyyy", Locale.US)
+    val dateFormat = SimpleDateFormat("MMM d, yyyy", Locale.getDefault())
 
 
     textView.text = dateFormat.format(sell.date.time)

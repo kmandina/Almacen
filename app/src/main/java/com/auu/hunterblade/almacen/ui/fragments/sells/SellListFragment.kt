@@ -17,6 +17,7 @@ import com.auu.hunterblade.almacen.R
 import com.auu.hunterblade.almacen.data.Sell
 import com.auu.hunterblade.almacen.databinding.FragmentListSellBinding
 import com.auu.hunterblade.almacen.ui.adapters.ListSellsAdapter
+import com.auu.hunterblade.almacen.ui.fragments.products.ProductViewModel
 import com.auu.hunterblade.almacen.utils.InjectorUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -24,6 +25,10 @@ class SellListFragment : Fragment() {
 
     private val viewModel: SellListViewModel by viewModels {
         InjectorUtils.provideSellListViewModelFactory(requireActivity())
+    }
+
+    private val viewModelProducts: ProductViewModel by viewModels {
+        InjectorUtils.provideProductViewModelFactory(requireActivity())
     }
 
     override fun onCreateView(
@@ -52,7 +57,7 @@ class SellListFragment : Fragment() {
         val tvEarn = view.findViewById<TextView>(R.id.tvEarn)
         val addSell = view.findViewById<FloatingActionButton>(R.id.addSell)
 
-        val adapter = ListSellsAdapter(viewModel)
+        val adapter = ListSellsAdapter(viewModel, viewModelProducts, viewLifecycleOwner)
         recycler.adapter = adapter
         subscribeUi(adapter)
 

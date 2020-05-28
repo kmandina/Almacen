@@ -25,7 +25,8 @@ object InjectorUtils {
     private fun getSellRepository(context: Context): SellRepository {
         return SellRepository.getInstance(
             AppDatabase.getInstance(context.applicationContext).SellDao(),
-            AppDatabase.getInstance(context.applicationContext).ProductSellDao()
+            AppDatabase.getInstance(context.applicationContext).ProductSellDao(),
+            AppDatabase.getInstance(context.applicationContext).ProductDao()
         )
     }
 

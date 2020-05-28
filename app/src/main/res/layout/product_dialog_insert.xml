@@ -32,7 +32,7 @@
     <ImageButton
         android:layout_margin="10dp"
         android:background="@drawable/background_indicator_negro"
-        app:layout_constraintStart_toEndOf="@+id/modifyPhoto"
+        app:layout_constraintStart_toStartOf="@+id/ibPhoto"
         app:layout_constraintBottom_toBottomOf="@+id/ibPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +41,6 @@
 
 
     <ImageButton
-        app:layout_constraintStart_toEndOf="@+id/ibModifyGallery"
         android:background="@drawable/background_indicator_negro"
         app:layout_constraintEnd_toEndOf="@+id/ibPhoto"
         app:layout_constraintBottom_toBottomOf="@+id/ibPhoto"

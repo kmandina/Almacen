@@ -4,7 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SellRepository private constructor(private val sellDao: SellDao, private val productSellDao: ProductSellDao) {
+class SellRepository private constructor(private val sellDao: SellDao, private val productSellDao: ProductSellDao, private val productDao: ProductDao) {
 
     fun getAllSell() = sellDao.getAllSell()
 
@@ -114,9 +114,9 @@ class SellRepository private constructor(private val sellDao: SellDao, private v
         // For Singleton instantiation
         @Volatile private var instance: SellRepository? = null
 
-        fun getInstance(sellDao: SellDao, productSellDao: ProductSellDao) =
+        fun getInstance(sellDao: SellDao, productSellDao: ProductSellDao, productDao: ProductDao) =
             instance ?: synchronized(this) {
-                instance ?: SellRepository(sellDao, productSellDao).also { instance = it }
+                instance ?: SellRepository(sellDao, productSellDao, productDao).also { instance = it }
             }
     }
 }

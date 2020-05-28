@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.auu.hunterblade.almacen.R
 import com.auu.hunterblade.almacen.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -18,16 +20,24 @@ class HomeFragment : Fragment() {
 
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        binding.cv1.setOnClickListener{
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val cv1 = view.findViewById<CardView>(R.id.cv1)
+        val cv2 = view.findViewById<CardView>(R.id.cv2)
+
+        cv1.setOnClickListener{
 
             it.findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToNavigationProductList())
         }
 
-        binding.cv2.setOnClickListener {
+        cv2.setOnClickListener {
 
             it.findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToSellList())
         }
-
-        return binding.root
     }
 }

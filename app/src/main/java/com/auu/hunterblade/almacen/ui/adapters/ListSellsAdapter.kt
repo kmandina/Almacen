@@ -5,6 +5,8 @@ import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -12,10 +14,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.auu.hunterblade.almacen.R
 import com.auu.hunterblade.almacen.data.Sell
 import com.auu.hunterblade.almacen.databinding.ListItemSellsBinding
+import com.auu.hunterblade.almacen.ui.fragments.products.ProductViewModel
 import com.auu.hunterblade.almacen.ui.fragments.sells.SellListFragmentDirections
 import com.auu.hunterblade.almacen.ui.fragments.sells.SellListViewModel
 
-class ListSellsAdapter(val viewModel: SellListViewModel) : ListAdapter<Sell, RecyclerView.ViewHolder>(ListSellDiffCallback()) {
+class ListSellsAdapter(
+    val viewModel: SellListViewModel,
+    private val viewModelProducts: ProductViewModel,
+    private val viewLifecycleOwner: LifecycleOwner
+) : ListAdapter<Sell, RecyclerView.ViewHolder>(ListSellDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return SellViewHolder(
@@ -35,7 +42,31 @@ class ListSellsAdapter(val viewModel: SellListViewModel) : ListAdapter<Sell, Rec
                 .setTitle(context.getString(R.string.notification))
                 .setMessage(context.getString(R.string.alert_delete))
                 .setNegativeButton(context.getString(R.string.cancel)) { _, _ ->   }
-                .setPositiveButton(context.getString(R.string.accept)) { _, _ ->  viewModel.deleteSell(sell) }
+                .setPositiveButton(context.getString(R.string.accept)) { _, _ ->
+                    viewModel.deleteSell(sell)
+
+//                    val products = viewModel.getSellList(sell.idSell)
+//
+//                    products.observe(viewLifecycleOwner) { list ->
+//
+//                        for(prod in list) {
+//
+//                            val p = viewModelProducts.getProduct(prod.idProduct)
+//
+//                            p.observe(viewLifecycleOwner) { pro ->
+//
+//                                viewModelProducts.updateProductById(
+//                                    pro.idProducto,
+//                                    pro.amount + prod.amountSell
+//                                )
+//                                p.removeObservers(viewLifecycleOwner)
+//
+//                            }
+//                        }
+//                        products.removeObservers(viewLifecycleOwner)
+//                    }
+
+                }
                 .show()
 
         }

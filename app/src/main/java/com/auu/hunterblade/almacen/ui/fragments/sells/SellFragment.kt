@@ -73,10 +73,14 @@ class SellFragment : Fragment() {
             tvEarn.text = getString(R.string.product_earn) + " $${it.totalEarn}"
 
             if(bandera) {
-                val adapter = ListProdsSellAdapter(viewModel, viewModelProducts, it)
+                val adapter = ListProdsSellAdapter(viewLifecycleOwner, viewModel, viewModelProducts, it)
                 recyclerView.adapter = adapter
                 subscribeUi(adapter)
                 bandera = false
+            }
+
+            if(recyclerView.adapter != null) {
+                (recyclerView.adapter as ListProdsSellAdapter).submitSell(it)
             }
         }
 
