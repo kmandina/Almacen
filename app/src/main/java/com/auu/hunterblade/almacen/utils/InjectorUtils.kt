@@ -6,6 +6,7 @@ import android.os.Environment
 import com.auu.hunterblade.almacen.data.AppDatabase
 import com.auu.hunterblade.almacen.data.ProductRepository
 import com.auu.hunterblade.almacen.data.SellRepository
+import com.auu.hunterblade.almacen.ui.fragments.dashboard.ProductSellViewModelFactory
 import com.auu.hunterblade.almacen.ui.fragments.products.ProductDetailViewModelFactory
 import com.auu.hunterblade.almacen.ui.fragments.products.ProductViewModelFactory
 import com.auu.hunterblade.almacen.ui.fragments.sells.SellListViewModelFactory
@@ -49,6 +50,12 @@ object InjectorUtils {
         context: Context
     ): SellListViewModelFactory {
         return SellListViewModelFactory(getSellRepository(context))
+    }
+
+    fun provideProductSellListViewModelFactory(
+        context: Context
+    ): ProductSellViewModelFactory {
+        return ProductSellViewModelFactory(getSellRepository(context))
     }
 
     fun provideSellViewModelFactory(

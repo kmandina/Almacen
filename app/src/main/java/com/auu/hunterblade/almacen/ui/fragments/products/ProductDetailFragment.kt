@@ -118,6 +118,8 @@ class ProductDetailFragment : Fragment() {
         val sellPrice = view.findViewById<TextView>(R.id.producto_item_SellPrice)
         val editAmount = view.findViewById<EditText>(R.id.etProducto_item_amount)
         val amount = view.findViewById<TextView>(R.id.producto_item_amount)
+        val amountInit = view.findViewById<TextView>(R.id.producto_item_amount_init)
+        val editAmountInit = view.findViewById<EditText>(R.id.etProducto_item_amount_init)
 
         urlPhoto.observe(viewLifecycleOwner){
 
@@ -147,6 +149,7 @@ class ProductDetailFragment : Fragment() {
                     buyPrice.visibility = View.INVISIBLE
                     sellPrice.visibility = View.INVISIBLE
                     amount.visibility = View.INVISIBLE
+                    amountInit.visibility = View.INVISIBLE
 
                     editName.visibility = View.VISIBLE
                     editName.setText(p.name)
@@ -162,6 +165,9 @@ class ProductDetailFragment : Fragment() {
 
                     editAmount.visibility = View.VISIBLE
                     editAmount.setText(p.amount.toString())
+
+                    editAmountInit.visibility = View.VISIBLE
+                    editAmountInit.setText(p.amountInit.toString())
 
                 }
                 else {
@@ -187,6 +193,10 @@ class ProductDetailFragment : Fragment() {
                             hideKeyboard(editAmount)
                             editAmount.clearFocus()
                         }
+                        editAmountInit.isFocused -> {
+                            hideKeyboard(editAmountInit)
+                            editAmountInit.clearFocus()
+                        }
                     }
 
                     modify.setImageResource(R.drawable.ic_modify)
@@ -195,6 +205,7 @@ class ProductDetailFragment : Fragment() {
                     p.priceBuy = editBuyPrice.text.toString().toFloat()
                     p.priceSell = editSellPrice.text.toString().toFloat()
                     p.amount = editAmount.text.toString().toLong()
+                    p.amountInit = editAmountInit.text.toString().toLong()
 
                     viewModelP.updateProduct(p)
 
@@ -203,12 +214,14 @@ class ProductDetailFragment : Fragment() {
                     editBuyPrice.visibility = View.INVISIBLE
                     editSellPrice.visibility = View.INVISIBLE
                     editAmount.visibility = View.INVISIBLE
+                    editAmountInit.visibility = View.INVISIBLE
 
                     name.visibility = View.VISIBLE
                     description.visibility = View.VISIBLE
                     buyPrice.visibility = View.VISIBLE
                     sellPrice.visibility = View.VISIBLE
                     amount.visibility = View.VISIBLE
+                    amountInit.visibility = View.VISIBLE
 
                 }
 
@@ -341,9 +354,9 @@ class ProductDetailFragment : Fragment() {
         }
     }
 
-    fun compressPicture(){
+    fun compressPicture(inputPath: String, outputPath: String){
 
-        fun calculateInSampleSize(options: BitmapFactory.Options, reqWidth: Int, reqHeight: Int): Int {
+        fun calculateInSampleSize(options: BitmapFactory.Options,  reqWidth: Int, reqHeight: Int): Int {
             val height: Int = options.outHeight
             val width: Int = options.outWidth
             var inSampleSize = 1
@@ -372,7 +385,7 @@ class ProductDetailFragment : Fragment() {
 
         val options = BitmapFactory.Options()
         options.inJustDecodeBounds = true
-        var bmp = BitmapFactory.decodeFile(mCurrentPhotoPath!!, options)
+        var bmp = BitmapFactory.decodeFile(inputPath, options)
 
         var actualHeight = options.outHeight
         var actualWidth = options.outWidth
@@ -405,7 +418,7 @@ class ProductDetailFragment : Fragment() {
         var scaledBitmap: Bitmap? = null
 
         try {
-            bmp = BitmapFactory.decodeFile(mCurrentPhotoPath!!, options)
+            bmp = BitmapFactory.decodeFile(inputPath, options)
         } catch (exception: OutOfMemoryError) {
             exception.printStackTrace()
         }
@@ -436,7 +449,7 @@ class ProductDetailFragment : Fragment() {
 
         val exif: ExifInterface
         try {
-            exif = ExifInterface(mCurrentPhotoPath!!)
+            exif = ExifInterface(inputPath)
             val orientation: Int = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0)
             val matrix = Matrix()
             if (orientation == 6) {
@@ -458,10 +471,10 @@ class ProductDetailFragment : Fragment() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-        var out: FileOutputStream? = null
+
 //        val filepath: String = getFilename()
         try {
-            out = FileOutputStream(mCurrentPhotoPath!!)
+            val out = FileOutputStream(outputPath)
 
             //write the compressed bitmap at the destination specified by filename.
             scaledBitmap!!.compress(Bitmap.CompressFormat.JPEG, 80, out)
@@ -481,7 +494,14 @@ class ProductDetailFragment : Fragment() {
             val uri: Uri? = data.data
             if(uri != null){
                 val finalFile = File(getRealPathFromURI(uri)!!)
-                mCurrentPhotoPath = finalFile.absolutePath
+
+                val storageDir: File = requireContext().getExternalFilesDir(null)!!
+
+                val outFile = File(storageDir, finalFile.name)
+
+                compressPicture(finalFile.absolutePath, outFile.absolutePath)
+
+                mCurrentPhotoPath = outFile.absolutePath
                 _url.apply {
                     value = mCurrentPhotoPath
                 }
@@ -505,7 +525,7 @@ class ProductDetailFragment : Fragment() {
         } else if (requestCode == CLICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
 
             CoroutineScope(Dispatchers.IO).launch {
-                compressPicture()
+                compressPicture(mCurrentPhotoPath!!, mCurrentPhotoPath!!)
             }
             _url.apply {
                 value = mCurrentPhotoPath

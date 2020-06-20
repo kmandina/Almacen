@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="currency">
+        <item>CUC</item>
+        <item>CUP</item>
+        <item>USD</item>
+    </string-array>
+
+    <string-array name="state">
+        <item>Max</item>
+        <item>Mid</item>
+        <item>Min</item>
+    </string-array>
+
+</resources>

@@ -3,10 +3,7 @@ package com.auu.hunterblade.almacen.ui.fragments.sells
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,8 +17,16 @@ import com.auu.hunterblade.almacen.ui.adapters.ListSellsAdapter
 import com.auu.hunterblade.almacen.ui.fragments.products.ProductViewModel
 import com.auu.hunterblade.almacen.utils.InjectorUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.*
 
 class SellListFragment : Fragment() {
+
+    /* TODO:
+    *   Day Picker
+    *
+    *
+    *  */
+
 
     private val viewModel: SellListViewModel by viewModels {
         InjectorUtils.provideSellListViewModelFactory(requireActivity())
@@ -87,6 +92,7 @@ class SellListFragment : Fragment() {
             val note: EditText = d.findViewById(R.id.etSellNote)
             val acceptSell = d.findViewById<Button>(R.id.acceptSell)
             val cancelSell = d.findViewById<Button>(R.id.cancelSell)
+            val calendarView = d.findViewById<CalendarView>(R.id.calendar)
 
             note.requestFocus()
 
@@ -106,6 +112,14 @@ class SellListFragment : Fragment() {
                 return validado
             }
 
+            val cal = Calendar.getInstance()
+
+            calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+
+                cal.set(year, month, dayOfMonth)
+
+            }
+
             cancelSell.setOnClickListener { d.dismiss() }
 
             acceptSell.setOnClickListener {
@@ -122,7 +136,7 @@ class SellListFragment : Fragment() {
                         }
                     }
 
-                    viewModel.addSell(Sell(note = ""))
+                    viewModel.addSell(Sell(note = "", date = cal))
                     d.dismiss()
                 }else if(Validador()){
                     viewModel.lista.observe(viewLifecycleOwner){ list ->
@@ -135,7 +149,7 @@ class SellListFragment : Fragment() {
                         }
                     }
 
-                    viewModel.addSell(Sell(note = note.text.toString()))
+                    viewModel.addSell(Sell(note = note.text.toString(), date = cal))
                     d.dismiss()
                 }
                 bandera = true

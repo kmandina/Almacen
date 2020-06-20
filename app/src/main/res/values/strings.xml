@@ -22,13 +22,15 @@
     <string name="product_description">Product Description</string>
     <string name="product_price_buy">Buy Price</string>
     <string name="product_price_sell">Sell Price</string>
-    <string name="product_amount">Amount</string>
+    <string name="product_amount">Real</string>
+    <string name="product_amount_initial">Initial</string>
 
     <string name="product_buy">Buy</string>
     <string name="product_sell">Sell</string>
     <string name="product_earn">Earn</string>
 
     <string name="product_sell_title_insert">Product Sell</string>
+    <string name="product_sell_title_statistics">Products Sells</string>
     <string name="product_sell_amount">Product Amount</string>
 
     <string name="producto_detail_description">Description</string>
@@ -40,8 +42,9 @@
     <string name="action_cancel">Cancel</string>
     <string name="action_accept">Accept</string>
     <string name="action_create">Create</string>
-    <string name="action_view_products">Products View</string>
-    <string name="action_view_sells">Sell View</string>
+    <string name="action_modify">Edit</string>
+    <string name="action_view_products">Inventory</string>
+    <string name="action_view_sells">Sells</string>
     <string name="action_feedback">Feedback</string>
     <string name="send_feedback_ask">Do you want to send any feedback by email?</string>
     <string name="action_donate">Donate</string>

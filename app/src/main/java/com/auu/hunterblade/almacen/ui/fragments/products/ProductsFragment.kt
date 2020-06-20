@@ -18,6 +18,7 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -52,6 +53,13 @@ import java.util.*
 import kotlin.math.roundToInt
 
 class ProductsFragment : Fragment() {
+
+    /* TODO:
+    *   Estados de los productos (más vendidos, medianamente y menos vendidos)
+    *   Saber cuantos se han vendido
+    *   Agregar tipo de moneda (CUC, CUP, Dolar)
+    *   Image from gallery copy and compress to image project folder
+    *  */
 
     private val PICK_IMAGE_REQUEST = 1
     private val REQUEST_TAKE_PHOTO = 200
@@ -118,11 +126,15 @@ class ProductsFragment : Fragment() {
             val cancelProduct = d.findViewById<Button>(R.id.cancelProduct)
             val photo = d.findViewById<ImageView>(R.id.ibPhoto)
 
+            val spinnerCurrency: Spinner = d.findViewById(R.id.sCurrency)
+            var currency = ""
+            val spinnerState: Spinner = d.findViewById(R.id.sState)
+            var state = ""
+
             val gallery = d.findViewById<ImageButton>(R.id.ibModifyGallery)
             val camara = d.findViewById<ImageButton>(R.id.modifyPhoto)
 
-//            name.requestFocus()
-            showKeyboard(name)
+            priceBuy.setText("0")
 
             fun Validador(): Boolean {
                 var validado = true
@@ -153,15 +165,15 @@ class ProductsFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                if (description.text.toString().isEmpty()) {
-                    validado = false
-                    description.requestFocus()
-                    Toast.makeText(
-                        context,
-                        getString(R.string.alert_empty_description),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+//                if (description.text.toString().isEmpty()) {
+//                    validado = false
+//                    description.requestFocus()
+//                    Toast.makeText(
+//                        context,
+//                        getString(R.string.alert_empty_description),
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
                 if (name.text.toString().isEmpty()) {
                     validado = false
                     name.requestFocus()
@@ -193,6 +205,58 @@ class ProductsFragment : Fragment() {
 
             }
 
+            ArrayAdapter.createFromResource(
+                requireContext(),
+                R.array.currency,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                spinnerCurrency.adapter = adapter
+            }
+
+            spinnerCurrency.onItemSelectedListener = object : OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    currency = spinnerCurrency.adapter.getItem(position) as String
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
+
+            spinnerCurrency.setSelection(0)
+
+            ArrayAdapter.createFromResource(
+                requireContext(),
+                R.array.state,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                spinnerState.adapter = adapter
+            }
+
+            spinnerState.onItemSelectedListener = object : OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    state = spinnerState.adapter.getItem(position) as String
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
+
+            spinnerState.setSelection(0)
+
             camara.setOnClickListener {
                 verifyPermissionTakePicture()
             }
@@ -208,7 +272,7 @@ class ProductsFragment : Fragment() {
                 if(Validador()){
 
                     if(mCurrentPhotoPath != null && mCurrentPhotoPath != ""){
-                        val prod = Product(name.text.toString(), description.text.toString(), priceBuy.text.toString().toFloat(), priceSell.text.toString().toFloat(), mCurrentPhotoPath!!, amount.text.toString().toLong())
+                        val prod = Product(name.text.toString(), description.text.toString(), priceBuy.text.toString().toFloat(), priceSell.text.toString().toFloat(), mCurrentPhotoPath!!, amount.text.toString().toLong(), amount.text.toString().toLong(), state, currency)
 
                         viewModel.addProduct(prod)
                         mCurrentPhotoPath = ""
@@ -217,7 +281,7 @@ class ProductsFragment : Fragment() {
                         }
                         d.dismiss()
                     }else {
-                        val prod = Product(name.text.toString(), description.text.toString(), priceBuy.text.toString().toFloat(), priceSell.text.toString().toFloat(), "", amount.text.toString().toLong())
+                        val prod = Product(name.text.toString(), description.text.toString(), priceBuy.text.toString().toFloat(), priceSell.text.toString().toFloat(), "", amount.text.toString().toLong(), amount.text.toString().toLong(), state, currency)
 
                         viewModel.addProduct(prod)
 
@@ -307,7 +371,7 @@ class ProductsFragment : Fragment() {
         return picturePath
     }
 
-    fun compressPicture(){
+    fun compressPicture(inputPath: String, outputPath: String){
 
         fun calculateInSampleSize(options: BitmapFactory.Options,  reqWidth: Int, reqHeight: Int): Int {
             val height: Int = options.outHeight
@@ -338,7 +402,7 @@ class ProductsFragment : Fragment() {
 
         val options = BitmapFactory.Options()
         options.inJustDecodeBounds = true
-        var bmp = BitmapFactory.decodeFile(mCurrentPhotoPath!!, options)
+        var bmp = BitmapFactory.decodeFile(inputPath, options)
 
         var actualHeight = options.outHeight
         var actualWidth = options.outWidth
@@ -371,7 +435,7 @@ class ProductsFragment : Fragment() {
         var scaledBitmap: Bitmap? = null
 
         try {
-            bmp = BitmapFactory.decodeFile(mCurrentPhotoPath!!, options)
+            bmp = BitmapFactory.decodeFile(inputPath, options)
         } catch (exception: OutOfMemoryError) {
             exception.printStackTrace()
         }
@@ -402,7 +466,7 @@ class ProductsFragment : Fragment() {
 
         val exif: ExifInterface
         try {
-            exif = ExifInterface(mCurrentPhotoPath!!)
+            exif = ExifInterface(inputPath)
             val orientation: Int = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0)
             val matrix = Matrix()
             if (orientation == 6) {
@@ -424,10 +488,10 @@ class ProductsFragment : Fragment() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-        var out: FileOutputStream? = null
+
 //        val filepath: String = getFilename()
         try {
-            out = FileOutputStream(mCurrentPhotoPath!!)
+            val out = FileOutputStream(outputPath)
 
             //write the compressed bitmap at the destination specified by filename.
             scaledBitmap!!.compress(Bitmap.CompressFormat.JPEG, 80, out)
@@ -446,7 +510,15 @@ class ProductsFragment : Fragment() {
             val uri: Uri? = data.data
             if(uri != null){
                 val finalFile = File(getRealPathFromURI(uri)!!)
-                mCurrentPhotoPath = finalFile.absolutePath
+
+                val storageDir: File = requireContext().getExternalFilesDir(null)!!
+
+                val outFile = File(storageDir, finalFile.name)
+
+                compressPicture(finalFile.absolutePath, outFile.absolutePath)
+
+                mCurrentPhotoPath = outFile.absolutePath
+
                 _url.apply {
                     value = mCurrentPhotoPath
                 }
@@ -461,7 +533,7 @@ class ProductsFragment : Fragment() {
         } else if (requestCode == CLICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
 
             CoroutineScope(Dispatchers.IO).launch {
-                compressPicture()
+                compressPicture(mCurrentPhotoPath!!, mCurrentPhotoPath!!)
             }
             _url.apply {
                 value = mCurrentPhotoPath

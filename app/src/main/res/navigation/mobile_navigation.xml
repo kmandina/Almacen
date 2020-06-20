@@ -37,9 +37,9 @@
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.auu.hunterblade.almacen.ui.fragments.notifications.NotificationsFragment"
+        android:name="com.auu.hunterblade.almacen.ui.fragments.settings.SettingsFragment"
         android:label="@string/title_settings"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/navigation_product_list"

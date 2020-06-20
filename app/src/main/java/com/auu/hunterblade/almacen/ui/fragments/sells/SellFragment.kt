@@ -3,10 +3,7 @@ package com.auu.hunterblade.almacen.ui.fragments.sells
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -24,6 +21,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class SellFragment : Fragment() {
+
 
     private val args: SellFragmentArgs by navArgs()
 
@@ -93,59 +91,81 @@ class SellFragment : Fragment() {
 
         addNote.setOnClickListener {
 
-            viewModel.sell.observe(viewLifecycleOwner) {
+            viewModel.sell.let { sellt ->
 
-                val d = Dialog(requireActivity())
-                d.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                d.setContentView(R.layout.sell_dialog_insert)
-                val lp = WindowManager.LayoutParams()
-                lp.copyFrom(d.window!!.attributes)
-                lp.width = WindowManager.LayoutParams.MATCH_PARENT
-                lp.height = WindowManager.LayoutParams.WRAP_CONTENT
-                d.window!!.attributes = lp
-                d.show()
+                if (sellt.value != null) {
 
-                val note: EditText = d.findViewById(R.id.etSellNote)
-                val acceptSell = d.findViewById<Button>(R.id.acceptSell)
-                val cancelSell = d.findViewById<Button>(R.id.cancelSell)
+                    val sell = sellt.value!!
 
-                note.setText(it.note)
-                note.requestFocus()
+                    val d = Dialog(requireActivity())
+                    d.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                    d.setContentView(R.layout.sell_dialog_modify)
+                    val lp = WindowManager.LayoutParams()
+                    lp.copyFrom(d.window!!.attributes)
+                    lp.width = WindowManager.LayoutParams.MATCH_PARENT
+                    lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+                    d.window!!.attributes = lp
+                    d.show()
 
-                fun Validador(): Boolean {
-                    var validado = true
+                    val note: EditText = d.findViewById(R.id.etSellNote)
+                    val acceptSell = d.findViewById<Button>(R.id.acceptSell)
+                    val cancelSell = d.findViewById<Button>(R.id.cancelSell)
+                    val calendarView = d.findViewById<CalendarView>(R.id.calendar)
 
-                    if (note.text.toString().length > 20) {
-                        validado = false
-                        note.requestFocus()
-                        Toast.makeText(
-                            context,
-                            getString(R.string.alert_overflow_note),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    val cal = Calendar.getInstance()
 
-                    return validado
-                }
+                    calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
 
-                cancelSell.setOnClickListener { d.dismiss() }
-
-                acceptSell.setOnClickListener {
-
-                    if (note.text == null || note.text.toString() == "") {
-
-                        viewModel.updateSell("")
-                        d.dismiss()
-
-                    } else if (Validador()) {
-
-                        viewModel.updateSell(note.text.toString())
-                        d.dismiss()
+                        cal.set(year, month, dayOfMonth)
 
                     }
 
+                    calendarView.setDate(sell.date.time.time, true, true)
+
+                    note.setText(sell.note)
+                    note.requestFocus()
+
+                    fun Validador(): Boolean {
+                        var validado = true
+
+                        if (note.text.toString().length > 20) {
+                            validado = false
+                            note.requestFocus()
+                            Toast.makeText(
+                                context,
+                                getString(R.string.alert_overflow_note),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                        return validado
+                    }
+
+                    cancelSell.setOnClickListener { d.dismiss() }
+
+                    acceptSell.setOnClickListener {
+
+                        if (note.text == null || note.text.toString() == "") {
+
+                            sell.note = ""
+                            sell.date = cal
+
+                            viewModel.updateSell(sell)
+                            d.dismiss()
+
+                        } else if (Validador()) {
+
+                            sell.note = note.text.toString()
+                            sell.date = cal
+
+                            viewModel.updateSell(sell)
+                            d.dismiss()
+
+                        }
+
+                    }
+//                viewModel.sell.removeObservers(viewLifecycleOwner)
                 }
-                viewModel.sell.removeObservers(viewLifecycleOwner)
             }
         }
 

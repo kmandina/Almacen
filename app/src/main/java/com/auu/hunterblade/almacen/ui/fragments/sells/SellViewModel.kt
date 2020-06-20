@@ -17,7 +17,9 @@ class SellViewModel internal constructor(
 
     fun addProductSell(product: ProductSell, s: Sell) =  sellRepository.addProductSell(product, s)
 
-    fun updateSell(note: String) = sellRepository.updateSellNote(arg, note)
+//    fun updateSell(note: String) = sellRepository.updateSellNote(arg, note)
+
+    fun updateSell(sell: Sell) = sellRepository.updateSell(sell)
 
     fun deleteSell(productSell: ProductSell, s: Sell) = sellRepository.deleteProductSell(productSell, s)
 }

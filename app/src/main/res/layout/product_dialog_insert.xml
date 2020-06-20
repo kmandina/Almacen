@@ -62,23 +62,13 @@
         android:hint="@string/product_name"/>
 
     <EditText
-        android:textAlignment="center"
-        android:hint="@string/product_description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/etProductDecription"
-        app:layout_constraintTop_toBottomOf="@+id/etProductName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <EditText
         android:inputType="number|numberDecimal"
         android:textAlignment="center"
         android:hint="@string/product_price_buy"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/priceBuy"
-        app:layout_constraintTop_toBottomOf="@+id/etProductDecription"
+        app:layout_constraintTop_toBottomOf="@+id/etProductName"
         app:layout_constraintEnd_toStartOf="@+id/priceSell"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -90,7 +80,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/priceSell"
-        app:layout_constraintTop_toBottomOf="@+id/etProductDecription"
+        app:layout_constraintTop_toBottomOf="@+id/etProductName"
         app:layout_constraintEnd_toStartOf="@+id/amount"
         app:layout_constraintStart_toEndOf="@+id/priceBuy"/>
 
@@ -101,13 +91,42 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/amount"
-        app:layout_constraintTop_toBottomOf="@+id/etProductDecription"
+        app:layout_constraintTop_toBottomOf="@+id/etProductName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/priceSell"/>
 
+    <Spinner
+        android:layout_margin="5dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/sCurrency"
+        app:layout_constraintTop_toBottomOf="@+id/priceBuy"
+        app:layout_constraintEnd_toStartOf="@+id/sState"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Spinner
+        android:layout_margin="5dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/sState"
+        app:layout_constraintTop_toBottomOf="@+id/amount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sCurrency"/>
+
+    <EditText
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:hint="@string/product_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/etProductDecription"
+        app:layout_constraintTop_toBottomOf="@+id/sCurrency"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <Button
         android:layout_marginStart="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/priceBuy"
+        app:layout_constraintTop_toBottomOf="@+id/etProductDecription"
         android:text="@string/action_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -117,7 +136,7 @@
 
     <Button
         android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/priceSell"
+        app:layout_constraintTop_toBottomOf="@+id/etProductDecription"
         android:text="@string/action_create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

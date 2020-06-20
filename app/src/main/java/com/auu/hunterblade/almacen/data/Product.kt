@@ -15,7 +15,15 @@ data class Product(
 
     @ColumnInfo(name = "photo") var photo: String,
 
-    @ColumnInfo(name = "amount") var amount: Long
+    @ColumnInfo(name = "amount_init") var amountInit: Long,
+
+    @ColumnInfo(name = "amount") var amount: Long,
+
+    @ColumnInfo(name = "state") var state: String,
+
+    @ColumnInfo(name = "currency") var currency: String,
+
+    @ColumnInfo(name = "sold") var sold: Long = 0
 ) {
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var idProducto: Long = 0
 }

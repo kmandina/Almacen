@@ -1,4 +1,4 @@
-package com.auu.hunterblade.almacen.ui.fragments.notifications
+package com.auu.hunterblade.almacen.ui.fragments.settings
 
 import android.content.Intent
 import android.net.Uri
@@ -9,12 +9,19 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import com.auu.hunterblade.almacen.R
-import com.auu.hunterblade.almacen.databinding.FragmentNotificationsBinding
-import com.auu.hunterblade.almacen.ui.fragments.home.HomeFragmentDirections
+import com.auu.hunterblade.almacen.databinding.FragmentSettingsBinding
 
-class NotificationsFragment : Fragment() {
+class SettingsFragment : Fragment() {
+
+    /* TODO:
+     *    Modulo para la conversion de CUC -> CUP y viceversa u otras monedas ejemplo Dolar
+     *    Menu de alertas para los productos, para informar cuando se estan acabando, mediante poner un limite de la existencia y notificar
+    *     Exportar pdf o excel con datos ya sea de las ventas o el estado de inventario de los productos
+    *     Exportar la base de datos (backup)
+    * */
+
+
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -22,7 +29,7 @@ class NotificationsFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
-        val binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        val binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
         context ?: return binding.root
 

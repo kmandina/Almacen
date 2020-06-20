@@ -42,6 +42,15 @@ class SellRepository private constructor(private val sellDao: SellDao, private v
 
     }
 
+    fun updateSell(sell: Sell){
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            sellDao.updateSell(sell)
+        }
+
+    }
+
     fun deleteSell(sell: Sell) {
 
         CoroutineScope(Dispatchers.IO).launch {

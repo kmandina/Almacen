@@ -9,7 +9,7 @@
     android:background="@color/colorBackgroundMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.notifications.NotificationsFragment">
+    tools:context=".ui.fragments.settings.SettingsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:paddingEnd="20dp"

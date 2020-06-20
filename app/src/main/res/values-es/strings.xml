@@ -22,13 +22,15 @@
     <string name="product_description">Descripción del Producto</string>
     <string name="product_price_buy">Precio de Compra</string>
     <string name="product_price_sell">Precio de Venta</string>
-    <string name="product_amount">Cantidad</string>
+    <string name="product_amount">Actual</string>
+    <string name="product_amount_initial">Inicial</string>
 
     <string name="product_buy">Compra</string>
     <string name="product_sell">Venta</string>
     <string name="product_earn">Ganancia</string>
 
     <string name="product_sell_title_insert">Producto a Vender</string>
+    <string name="product_sell_title_statistics">Productos Vendidos</string>
     <string name="product_sell_amount">Cantidad del Producto a Vender</string>
 
     <string name="producto_detail_description">Descripción</string>
@@ -40,8 +42,9 @@
     <string name="action_cancel">Cancelar</string>
     <string name="action_accept">Aceptar</string>
     <string name="action_create">Crear</string>
-    <string name="action_view_products">Ver Productos</string>
-    <string name="action_view_sells">Ver Ventas</string>
+    <string name="action_modify">Modificar</string>
+    <string name="action_view_products">Inventario</string>
+    <string name="action_view_sells">Ventas</string>
     <string name="action_feedback">Recomendaciones</string>
     <string name="send_feedback_ask">¿Desea enviar sus criterios y sugerencias por correo electrónico?</string>
     <string name="action_donate">Contribuir</string>
