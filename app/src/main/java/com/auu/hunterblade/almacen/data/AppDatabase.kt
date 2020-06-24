@@ -23,6 +23,7 @@ abstract class AppDatabase : RoomDatabase() {
                 database.execSQL("ALTER TABLE product ADD COLUMN state TEXT NOT NULL DEFAULT 'Max';")
                 database.execSQL("ALTER TABLE product ADD COLUMN currency TEXT NOT NULL DEFAULT 'CUP';")
                 database.execSQL("ALTER TABLE product ADD COLUMN sold INTEGER NOT NULL DEFAULT 0;")
+                database.execSQL("ALTER TABLE product ADD COLUMN amount_init INTEGER NOT NULL DEFAULT 0;")
             }
         }
 

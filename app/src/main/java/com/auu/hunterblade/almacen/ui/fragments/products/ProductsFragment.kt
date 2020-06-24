@@ -31,6 +31,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.auu.hunterblade.almacen.BuildConfig
 import com.auu.hunterblade.almacen.R
@@ -40,6 +41,8 @@ import com.auu.hunterblade.almacen.ui.adapters.ListProdsAdapter
 import com.auu.hunterblade.almacen.utils.InjectorUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetSequence
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -100,8 +103,9 @@ class ProductsFragment : Fragment() {
 
         val recycler = view.findViewById<RecyclerView>(R.id.products)
         val addProd = view.findViewById<FloatingActionButton>(R.id.addProd)
+        val sell = view.findViewById<ImageButton>(R.id.ibSell)
 
-        val adapter = ListProdsAdapter(viewModel)
+        val adapter = ListProdsAdapter(viewModel, requireActivity())
         recycler.adapter = adapter
         subscribeUi(adapter)
 
@@ -229,7 +233,7 @@ class ProductsFragment : Fragment() {
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
 
-            spinnerCurrency.setSelection(0)
+            spinnerCurrency.setSelection(1)
 
             ArrayAdapter.createFromResource(
                 requireContext(),
@@ -255,7 +259,7 @@ class ProductsFragment : Fragment() {
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
 
-            spinnerState.setSelection(0)
+            spinnerState.setSelection(2)
 
             camara.setOnClickListener {
                 verifyPermissionTakePicture()
@@ -293,6 +297,79 @@ class ProductsFragment : Fragment() {
             }
 
         }
+
+        sell.setOnClickListener{
+            it.findNavController().navigate(ProductsFragmentDirections.actionNavigationProductListToSellList())
+        }
+
+        val sp = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val started = sp.getBoolean("startedProds", false)
+
+        if(!started){
+            getSequence(addProd, sell)
+                .listener(object : TapTargetSequence.Listener {
+
+                    override fun onSequenceFinish() {                  //  ((TextView) findViewById(R.id.educated)).setText("Congratulations! You're educated now!");
+
+                    }
+
+                    //
+                    override fun onSequenceStep(lastTarget: TapTarget, targetClicked: Boolean) {
+
+
+                    }
+
+                    //
+                    override fun onSequenceCanceled(lastTarget: TapTarget) {
+                        // /*
+                    }
+                })
+                .start()
+            sp.edit().putBoolean("startedProds", true).apply()
+        }
+
+    }
+
+    private fun getSequence(addProd: FloatingActionButton, sell: ImageButton): TapTargetSequence {
+
+        val textColor = R.color.colorBackgroundMain
+        val outerCircleColor = R.color.colorAccent
+
+        return TapTargetSequence(activity)
+            .targets( // Likewise, this tap target will target the search button
+                TapTarget.forView(addProd, "Titulo", "Descripcion").outerCircleColor(outerCircleColor) // Specify a color for the outer circle
+                    .outerCircleAlpha(0.70f) // Specify the alpha amount for the outer circle
+                    .targetCircleColor(textColor) // Specify a color for the target circle
+                    .titleTextSize(22) // Specify the size (in sp) of the title text
+                    .titleTextColor(textColor)
+                    .descriptionTextSize(16) // Specify the size (in sp) of the description text
+                    .descriptionTextColor(outerCircleColor)  // Specify the color of the description text
+                    .textColor(textColor) // Specify a color for both the title and description text
+                    .textTypeface(Typeface.SANS_SERIF) // Specify a typeface for the text
+                    .dimColor(R.color.colorPrimary) // If set, will dim behind the view with 30% opacity of the given color
+                    .drawShadow(true) // Whether to draw a drop shadow or not
+                    .cancelable(true) // Whether tapping outside the outer circle dismisses the view
+                    .tintTarget(true) // Whether to tint the target view's color
+                    .transparentTarget(false) // Specify whether the target is transparent (displays the content underneath)
+                    .targetRadius(60),
+                TapTarget.forView(sell,"Titulo", "Descripcion") // All options below are optional
+                    .outerCircleColor(outerCircleColor) // Specify a color for the outer circle
+                    .outerCircleAlpha(0.70f) // Specify the alpha amount for the outer circle
+                    .targetCircleColor(textColor) // Specify a color for the target circle
+                    .titleTextSize(22) // Specify the size (in sp) of the title text
+////.titleTextColor(R.color.White)      // Specify the color of the title text
+                    .descriptionTextSize(16) // Specify the size (in sp) of the description text
+////.descriptionTextColor(R.color.red)  // Specify the color of the description text
+                    .textColor(textColor) // Specify a color for both the title and description text
+                    .textTypeface(Typeface.SANS_SERIF) // Specify a typeface for the text
+                    .dimColor(R.color.colorPrimary) // If set, will dim behind the view with 30% opacity of the given color
+                    .drawShadow(true) // Whether to draw a drop shadow or not
+                    .cancelable(true) // Whether tapping outside the outer circle dismisses the view
+                    .tintTarget(true) // Whether to tint the target view's color
+                    .transparentTarget(false) // Specify whether the target is transparent (displays the content underneath)
+//// Specify a custom drawable to draw as the target
+                    .targetRadius(60)
+            )
 
     }
 

@@ -87,7 +87,7 @@
     <EditText
         android:inputType="number"
         android:textAlignment="center"
-        android:hint="@string/product_amount"
+        android:hint="@string/product_amount_initial"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/amount"

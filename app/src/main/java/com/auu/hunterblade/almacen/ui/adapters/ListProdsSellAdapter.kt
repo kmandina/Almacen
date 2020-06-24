@@ -37,7 +37,7 @@ class ListProdsSellAdapter(
         val prod = getItem(position)
         (holder as ProductSellViewHolder).bind(prod)
 
-        holder.binding.ibClear.setOnClickListener {
+        holder.itemView.setOnLongClickListener {
 
             val context = it.context
 
@@ -60,7 +60,24 @@ class ListProdsSellAdapter(
                 }
                 .show()
 
+            true
         }
+
+//        holder.itemView.setOnLongClickListener {
+//
+//            val context = it.context
+//
+//            AlertDialog.Builder(context)
+//                .setTitle(context.getString(R.string.notification))
+//                .setMessage(context.getString(R.string.alert_action))
+//                .setNegativeButton(context.getString(R.string.delete)) { _, _ ->  viewModel.deleteProduct(prod) }
+//                .setNeutralButton(context.getString(R.string.share)){_,_ ->   createShareIntent(prod, context) }
+//                .setPositiveButton(context.getString(R.string.cancel)) { _, _ -> }
+//                .show()
+//
+//            true
+//        }
+
     }
 
     class ProductSellViewHolder(

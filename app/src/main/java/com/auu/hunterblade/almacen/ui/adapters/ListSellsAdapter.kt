@@ -34,7 +34,7 @@ class ListSellsAdapter(
         val sell = getItem(position)
         (holder as SellViewHolder).bind(sell)
 
-        holder.binding.ibClear.setOnClickListener {
+        holder.itemView.setOnLongClickListener {
 
             val context = it.context
 
@@ -68,7 +68,7 @@ class ListSellsAdapter(
 
                 }
                 .show()
-
+            true
         }
     }
 

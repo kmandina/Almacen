@@ -24,6 +24,7 @@
     <string name="product_price_sell">Precio de Venta</string>
     <string name="product_amount">Actual</string>
     <string name="product_amount_initial">Inicial</string>
+    <string name="product_currency">Moneda</string>
 
     <string name="product_buy">Compra</string>
     <string name="product_sell">Venta</string>
@@ -59,12 +60,15 @@
     <string name="alert_overflow_note">La cantidad máxima de caracteres es 20</string>
 
     <string name="alert_delete">¿Desea eliminar el elemento?</string>
+    <string name="alert_action">¿Qué desea hacer?</string>
 
     <string name="alert_file_not_found">Imagen no encontrada</string>
     <string name="alert_selection_sharing">Seleccione la aplicación para compartir</string>
 
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
+    <string name="share">Compartir</string>
+    <string name="delete">Eliminar</string>
     <string name="notification">Notificación</string>
     <string name="share_name">Nombre: </string>
     <string name="share_description">Descripción: </string>

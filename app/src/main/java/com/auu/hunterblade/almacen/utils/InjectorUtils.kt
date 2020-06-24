@@ -12,6 +12,8 @@ import com.auu.hunterblade.almacen.ui.fragments.products.ProductViewModelFactory
 import com.auu.hunterblade.almacen.ui.fragments.sells.SellListViewModelFactory
 import com.auu.hunterblade.almacen.ui.fragments.sells.SellViewModelFactory
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 
 /**
  * Static methods used to inject classes needed for various Activities and Fragments.
@@ -83,5 +85,30 @@ object InjectorUtils {
             AppFileDir(context)
         }
     }
+
+//    fun exportDatabase(){
+//        val sd = Environment.getExternalStorageDirectory()
+//
+//        // Get the Room database storage path using SupportSQLiteOpenHelper
+//        AppDatabase.getDatabase(applicationContext)!!.openHelper.writableDatabase.path
+//
+//        if (sd.canWrite()) {
+//            val currentDBPath = AppDatabase.getDatabase(applicationContext)!!.openHelper.writableDatabase.path
+//            val backupDBPath = "mydb.sqlite"      //you can modify the file type you need to export
+//            val currentDB = File(currentDBPath)
+//            val backupDB = File(sd, backupDBPath)
+//            if (currentDB.exists()) {
+//                try {
+//                    val src = FileInputStream(currentDB).channel
+//                    val dst = FileOutputStream(backupDB).channel
+//                    dst.transferFrom(src, 0, src.size())
+//                    src.close()
+//                    dst.close()
+//                } catch (e: IOException) {
+//                    e.printStackTrace()
+//                }
+//            }
+//        }
+//    }
 
 }

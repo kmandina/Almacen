@@ -1,6 +1,7 @@
 package com.auu.hunterblade.almacen.ui.fragments.sells
 
 import android.app.Dialog
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.*
 import android.widget.*
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.auu.hunterblade.almacen.R
 import com.auu.hunterblade.almacen.data.Sell
@@ -16,6 +18,8 @@ import com.auu.hunterblade.almacen.databinding.FragmentListSellBinding
 import com.auu.hunterblade.almacen.ui.adapters.ListSellsAdapter
 import com.auu.hunterblade.almacen.ui.fragments.products.ProductViewModel
 import com.auu.hunterblade.almacen.utils.InjectorUtils
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetSequence
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
@@ -156,7 +160,60 @@ class SellListFragment : Fragment() {
             }
 
         }
+
+        val sp = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val started = sp.getBoolean("startedSells", false)
+
+        if(!started){
+            getSequence(addSell)
+                .listener(object : TapTargetSequence.Listener {
+
+                    override fun onSequenceFinish() {                  //  ((TextView) findViewById(R.id.educated)).setText("Congratulations! You're educated now!");
+
+                    }
+
+                    //
+                    override fun onSequenceStep(lastTarget: TapTarget, targetClicked: Boolean) {
+
+
+                    }
+
+                    //
+                    override fun onSequenceCanceled(lastTarget: TapTarget) {
+                        // /*
+                    }
+                })
+                .start()
+            sp.edit().putBoolean("startedSells", true).apply()
+        }
     }
+
+    private fun getSequence(addSell: FloatingActionButton): TapTargetSequence {
+
+        val textColor = R.color.colorBackgroundMain
+        val outerCircleColor = R.color.colorAccent
+
+        return TapTargetSequence(activity)
+            .targets( // Likewise, this tap target will target the search button
+                TapTarget.forView(addSell, "Titulo", "Descripcion").outerCircleColor(outerCircleColor) // Specify a color for the outer circle
+                    .outerCircleAlpha(0.70f) // Specify the alpha amount for the outer circle
+                    .targetCircleColor(textColor) // Specify a color for the target circle
+                    .titleTextSize(22) // Specify the size (in sp) of the title text
+                    .titleTextColor(textColor)
+                    .descriptionTextSize(16) // Specify the size (in sp) of the description text
+                    .descriptionTextColor(outerCircleColor)  // Specify the color of the description text
+                    .textColor(textColor) // Specify a color for both the title and description text
+                    .textTypeface(Typeface.SANS_SERIF) // Specify a typeface for the text
+                    .dimColor(R.color.colorPrimary) // If set, will dim behind the view with 30% opacity of the given color
+                    .drawShadow(true) // Whether to draw a drop shadow or not
+                    .cancelable(true) // Whether tapping outside the outer circle dismisses the view
+                    .tintTarget(true) // Whether to tint the target view's color
+                    .transparentTarget(false) // Specify whether the target is transparent (displays the content underneath)
+                    .targetRadius(60)
+            )
+
+    }
+
 
     private fun subscribeUi(
         adapter: ListSellsAdapter

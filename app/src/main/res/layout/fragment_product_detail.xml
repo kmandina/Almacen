@@ -147,50 +147,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Apple" />
 
-            <TextView
-                android:id="@+id/title_description"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginTop="@dimen/margin_normal"
-                android:layout_marginEnd="@dimen/margin_small"
-                android:gravity="center_horizontal"
-                android:text="@string/producto_detail_description"
-                android:textColor="?attr/colorAccent"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/product_detail_name" />
-
-            <EditText
-                android:visibility="invisible"
-                android:id="@+id/etDescription"
-                android:layout_width="0dp"
-                android:layout_marginTop="20dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_small"
-                android:gravity="center_horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title_description"
-                android:text="@{viewModel.product.description}"
-                tools:text="Product Decription"/>
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="0dp"
-                android:layout_marginTop="20dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_small"
-                android:gravity="center_horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title_description"
-                android:text="@{viewModel.product.description}"
-                tools:text="Product Decription" />
-
             <EditText
                 android:inputType="number|numberDecimal"
                 android:visibility="invisible"
@@ -201,10 +157,10 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/etProducto_item_SellPrice"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etDescription"
+                app:layout_constraintTop_toBottomOf="@+id/etProduct_detail_name"
                 app:setFloat="@{viewModel.product.priceBuy}"
                 tools:text="Buy Price" />
 
@@ -216,10 +172,10 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/producto_item_SellPrice"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/description"
+                app:layout_constraintTop_toBottomOf="@+id/product_detail_name"
                 app:setFloatBuy="@{viewModel.product.priceBuy}"
                 tools:text="Buy Price" />
 
@@ -233,10 +189,10 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="15dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/etProducto_item_amount_init"
                 app:layout_constraintStart_toEndOf="@+id/edProducto_item_BuyPrice"
-                app:layout_constraintTop_toBottomOf="@+id/etDescription"
+                app:layout_constraintTop_toBottomOf="@+id/etProduct_detail_name"
                 app:setFloat="@{viewModel.product.priceSell}"
                 tools:text="Sell Price" />
 
@@ -249,10 +205,10 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="15dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/producto_item_amount_init"
                 app:layout_constraintStart_toEndOf="@+id/producto_item_BuyPrice"
-                app:layout_constraintTop_toBottomOf="@+id/description"
+                app:layout_constraintTop_toBottomOf="@+id/product_detail_name"
                 app:setFloatSell="@{viewModel.product.priceSell}"
                 tools:text="Sell Price" />
 
@@ -267,10 +223,10 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="15dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/etProducto_item_amount"
                 app:layout_constraintStart_toEndOf="@+id/etProducto_item_SellPrice"
-                app:layout_constraintTop_toBottomOf="@+id/etDescription"
+                app:layout_constraintTop_toBottomOf="@+id/etProduct_detail_name"
                 app:setLong="@{viewModel.product.amountInit}"
                 tools:text="Product Amount Initial" />
 
@@ -283,10 +239,10 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="15dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/producto_item_amount"
                 app:layout_constraintStart_toEndOf="@+id/producto_item_SellPrice"
-                app:layout_constraintTop_toBottomOf="@+id/description"
+                app:layout_constraintTop_toBottomOf="@+id/product_detail_name"
                 app:setLongAmountInitial="@{viewModel.product.amountInit}"
                 tools:text="Product Amount Initial" />
 
@@ -301,10 +257,10 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="15dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/etProducto_item_amount_init"
-                app:layout_constraintTop_toBottomOf="@+id/etDescription"
+                app:layout_constraintTop_toBottomOf="@+id/etProduct_detail_name"
                 app:setLong="@{viewModel.product.amount}"
                 tools:text="Product Amount Real" />
 
@@ -317,12 +273,79 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="15dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/producto_item_amount_init"
-                app:layout_constraintTop_toBottomOf="@+id/description"
+                app:layout_constraintTop_toBottomOf="@+id/product_detail_name"
                 app:setLongAmount="@{viewModel.product.amount}"
                 tools:text="Product Amount Real" />
+
+            <Spinner
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="110dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/sCurrency"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/sState"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <Spinner
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="110dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/sState"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/sCurrency"/>
+
+            <TextView
+                app:hasDescription="@{viewModel.product.description}"
+                android:id="@+id/title_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:gravity="center_horizontal"
+                android:text="@string/producto_detail_description"
+                android:textColor="?attr/colorAccent"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sCurrency" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_description"
+                android:text="@{viewModel.product.description}"
+                tools:text="Product Decription" />
+
+            <EditText
+                android:visibility="invisible"
+                android:id="@+id/etDescription"
+                android:layout_width="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_description"
+                android:text="@{viewModel.product.description}"
+                tools:text="Product Decription"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

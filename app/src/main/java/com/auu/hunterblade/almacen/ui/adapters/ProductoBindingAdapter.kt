@@ -161,3 +161,11 @@ fun bindDateSellText(textView: TextView, sell: Sell) {
     textView.text = dateFormat.format(sell.date.time)
 }
 
+@BindingAdapter("hasDescription")
+fun bindHasDescription(textView: TextView, d: String) {
+
+    if(d == ""){
+        textView.visibility = View.GONE
+    }
+}
+

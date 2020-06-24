@@ -29,13 +29,39 @@
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin">
 
-                    <TextView
-                        android:textColor="@android:color/background_light"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="?attr/actionBarSize"
-                        android:gravity="center"
-                        android:text="@string/title_products"
-                        android:textAppearance="?attr/textAppearanceHeadline5" />
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/title"
+                            app:layout_constraintEnd_toStartOf="@+id/ibSell"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textColor="@android:color/background_light"
+                            android:layout_width="0dp"
+                            android:layout_height="?attr/actionBarSize"
+                            android:gravity="center"
+                            android:text="@string/title_products"
+                            android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                        <ImageButton
+                            android:tint="@color/cardview_light_background"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="25dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/title"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@android:color/transparent"
+                            android:id="@+id/ibSell"
+                            android:src="@drawable/ic_monetization"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 </androidx.appcompat.widget.Toolbar>
 

@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Titles -->
-    <string name="app_name">Mis Ventas</string>
+    <string name="app_name">My Sells</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_products">Products</string>
     <string name="title_statistics">Statistics</string>

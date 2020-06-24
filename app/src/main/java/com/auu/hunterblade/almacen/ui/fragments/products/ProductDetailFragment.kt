@@ -121,6 +121,87 @@ class ProductDetailFragment : Fragment() {
         val amountInit = view.findViewById<TextView>(R.id.producto_item_amount_init)
         val editAmountInit = view.findViewById<EditText>(R.id.etProducto_item_amount_init)
 
+        val spinnerCurrency: Spinner = view.findViewById(R.id.sCurrency)
+        var currency = ""
+        val spinnerState: Spinner = view.findViewById(R.id.sState)
+        var state = ""
+
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.currency,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinnerCurrency.adapter = adapter
+        }
+
+        spinnerCurrency.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                currency = spinnerCurrency.adapter.getItem(position) as String
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        viewModelP.product.let{
+
+            if(it.value != null){
+                for(i in 0..2){
+
+                    if(spinnerCurrency.adapter.getItem(i) as String == it.value!!.currency){
+                        spinnerCurrency.setSelection(i)
+                    }
+
+                }
+            }
+
+        }
+
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.state,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinnerState.adapter = adapter
+        }
+
+        spinnerState.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                state = spinnerState.adapter.getItem(position) as String
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        viewModelP.product.let{
+
+            if(it.value != null){
+                for(i in 0..2){
+
+                    if(spinnerState.adapter.getItem(i) as String == it.value!!.state){
+                        spinnerState.setSelection(i)
+                    }
+
+                }
+            }
+
+        }
+
         urlPhoto.observe(viewLifecycleOwner){
 
             if(it != ""){
@@ -206,6 +287,8 @@ class ProductDetailFragment : Fragment() {
                     p.priceSell = editSellPrice.text.toString().toFloat()
                     p.amount = editAmount.text.toString().toLong()
                     p.amountInit = editAmountInit.text.toString().toLong()
+                    p.currency = currency
+                    p.state = state
 
                     viewModelP.updateProduct(p)
 
@@ -621,7 +704,7 @@ class ProductDetailFragment : Fragment() {
                         Intent.EXTRA_TEXT,
                         getString(R.string.share_name) + p.name + "\n"
                                 + getString(R.string.share_description) + p.description + "\n"
-                                + getString(R.string.share_price) + p.priceSell
+                                + getString(R.string.share_price) + p.priceSell + " ${p.currency}"
                     )
                     val imageUri = FileProvider.getUriForFile(
                         requireContext(),
@@ -640,7 +723,7 @@ class ProductDetailFragment : Fragment() {
                     val shareIntent = ShareCompat.IntentBuilder.from(requireActivity())
                         .setText(getString(R.string.share_name) + p.name + "\n"
                                 + getString(R.string.share_description) + p.description + "\n"
-                                + getString(R.string.share_price) + p.priceSell)
+                                + getString(R.string.share_price) + p.priceSell + " ${p.currency}")
                         .setType("text/plain")
                         .createChooserIntent()
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
