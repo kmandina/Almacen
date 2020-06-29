@@ -23,6 +23,7 @@
     <string name="product_price_buy">Buy Price</string>
     <string name="product_price_sell">Sell Price</string>
     <string name="product_amount">Real</string>
+    <string name="product_amount_normal">Amount</string>
     <string name="product_amount_initial">Initial</string>
     <string name="product_currency">Currency</string>
 
@@ -46,9 +47,12 @@
     <string name="action_modify">Edit</string>
     <string name="action_view_products">Inventory</string>
     <string name="action_view_sells">Sells</string>
+    <string name="action_view_reports">Reports</string>
     <string name="action_feedback">Feedback</string>
     <string name="send_feedback_ask">Do you want to send any feedback by email?</string>
     <string name="action_donate">Donate</string>
+    <string name="action_generate_pdf">Generate Report</string>
+    <string name="action_backup_db">Backup Data Base</string>
     <string name="menu_item_share_product">Share</string>
 
     <string name="alert_empty_name">Type a name</string>

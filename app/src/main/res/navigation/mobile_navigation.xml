@@ -89,6 +89,24 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
 
+        <action
+            android:id="@+id/action_navigation_sell_list_to_report_sell"
+            app:destination="@id/navigation_report"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_report"
+        android:name="com.auu.hunterblade.almacen.ui.fragments.reports.ReportFragment"
+        android:label="Report Sell"
+        tools:layout="@layout/fragment_report">
+        <argument
+            android:name="id"
+            app:argType="long" />
     </fragment>
 
     <fragment
@@ -102,6 +120,13 @@
         <action
             android:id="@+id/action_navigation_sell_view_to_sell_product_register"
             app:destination="@id/navigation_sell_product_register"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigation_sell_view_to_report_sell"
+            app:destination="@id/navigation_report"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"

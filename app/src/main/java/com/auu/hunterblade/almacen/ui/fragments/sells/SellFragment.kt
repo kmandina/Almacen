@@ -64,6 +64,7 @@ class SellFragment : Fragment() {
         val tvEarn = view.findViewById<TextView>(R.id.tvEarn)
         val addProdSell = view.findViewById<FloatingActionButton>(R.id.addProdSell)
         val addNote = view.findViewById<FloatingActionButton>(R.id.addNote)
+        val addSave = view.findViewById<FloatingActionButton>(R.id.addSave)
 
         var bandera = true
 
@@ -169,6 +170,19 @@ class SellFragment : Fragment() {
 
                     }
 //                viewModel.sell.removeObservers(viewLifecycleOwner)
+                }
+            }
+        }
+
+        addSave.setOnClickListener {v ->
+
+            viewModel.sell.let {
+
+                if(it.value != null) {
+                    val sell = it.value!!
+                    val direction =
+                        SellFragmentDirections.actionNavigationSellViewToReportSell(sell.idSell)
+                    v.findNavController().navigate(direction)
                 }
             }
         }

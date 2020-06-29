@@ -140,6 +140,12 @@ fun bindLongTextAmount(textView: TextView, v: Long) {
     textView.text = textView.context.getString(R.string.product_amount) + " $v"
 }
 
+@BindingAdapter("setLongAmountNormal")
+fun bindLongTextAmountNormal(textView: TextView, v: Long) {
+
+    textView.text = textView.context.getString(R.string.product_amount_normal) + " $v"
+}
+
 @BindingAdapter("setLongAmountInitial")
 fun bindLongTextAmountInitial(textView: TextView, v: Long) {
 

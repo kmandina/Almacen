@@ -82,7 +82,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/producto_item_earnSell"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:setLongAmount="@{product.amountSell}"
+                app:setLongAmountNormal="@{product.amountSell}"
                 tools:text="Product amountSell" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

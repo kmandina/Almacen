@@ -78,6 +78,18 @@
                 app:srcCompat="@drawable/ic_assignment" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/addSave"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
+                app:layout_anchorGravity="bottom|center"
+                app:srcCompat="@drawable/ic_save" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/addNote"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

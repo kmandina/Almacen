@@ -40,34 +40,18 @@ class ListSellsAdapter(
 
             AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.notification))
-                .setMessage(context.getString(R.string.alert_delete))
-                .setNegativeButton(context.getString(R.string.cancel)) { _, _ ->   }
-                .setPositiveButton(context.getString(R.string.accept)) { _, _ ->
-                    viewModel.deleteSell(sell)
+                .setMessage(context.getString(R.string.alert_action))
+                .setNegativeButton(context.getString(R.string.delete)) { _, _ ->   viewModel.deleteSell(sell) }
+                .setNeutralButton(context.getString(R.string.action_generate_pdf)){_,_ ->
 
-//                    val products = viewModel.getSellList(sell.idSell)
-//
-//                    products.observe(viewLifecycleOwner) { list ->
-//
-//                        for(prod in list) {
-//
-//                            val p = viewModelProducts.getProduct(prod.idProduct)
-//
-//                            p.observe(viewLifecycleOwner) { pro ->
-//
-//                                viewModelProducts.updateProductById(
-//                                    pro.idProducto,
-//                                    pro.amount + prod.amountSell
-//                                )
-//                                p.removeObservers(viewLifecycleOwner)
-//
-//                            }
-//                        }
-//                        products.removeObservers(viewLifecycleOwner)
-//                    }
+                    val direction =
+                        SellListFragmentDirections.actionNavigationSellListToReportSell(sell.idSell)
+                    it.findNavController().navigate(direction)
 
                 }
+                .setPositiveButton(context.getString(R.string.cancel)) { _, _ -> }
                 .show()
+
             true
         }
     }

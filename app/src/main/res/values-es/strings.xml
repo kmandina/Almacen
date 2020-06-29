@@ -23,6 +23,7 @@
     <string name="product_price_buy">Precio de Compra</string>
     <string name="product_price_sell">Precio de Venta</string>
     <string name="product_amount">Actual</string>
+    <string name="product_amount_normal">Cantidad</string>
     <string name="product_amount_initial">Inicial</string>
     <string name="product_currency">Moneda</string>
 
@@ -46,9 +47,12 @@
     <string name="action_modify">Modificar</string>
     <string name="action_view_products">Inventario</string>
     <string name="action_view_sells">Ventas</string>
+    <string name="action_view_reports">Reportes</string>
     <string name="action_feedback">Recomendaciones</string>
     <string name="send_feedback_ask">¿Desea enviar sus criterios y sugerencias por correo electrónico?</string>
     <string name="action_donate">Contribuir</string>
+    <string name="action_generate_pdf">Generar Reporte</string>
+    <string name="action_backup_db">Exportar Base de datos</string>
     <string name="menu_item_share_product">Compartir</string>
 
     <string name="alert_empty_name">Escriba un nombre para el producto</string>
